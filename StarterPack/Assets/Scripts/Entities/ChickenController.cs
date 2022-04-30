@@ -23,6 +23,9 @@ public class ChickenController : MonoBehaviour
     public bool carryingEgg = false;
 
     private Rigidbody2D m_rigidbody;
+    private SpriteRenderer spriteRenderer;
+
+    private Animator animator;
 
     private void Start()
     {
@@ -32,6 +35,8 @@ public class ChickenController : MonoBehaviour
     private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         //Get Raws
         HRaw = 0;
@@ -66,10 +71,16 @@ public class ChickenController : MonoBehaviour
 
         if (canMove)
         {
+
             Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * finalSpeed;
             m_rigidbody.MovePosition(m_rigidbody.position + move);
 
         }
+
+        if(HRaw > 0) spriteRenderer.flipX = true;
+        if(HRaw < 0) spriteRenderer.flipX = false;
+
+        animator.SetBool("Walking", HRaw != 0);
     }
 
     public void PickupEgg()
