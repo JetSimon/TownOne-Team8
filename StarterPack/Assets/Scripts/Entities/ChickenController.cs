@@ -28,6 +28,9 @@ public class ChickenController : MonoBehaviour
 
     private Animator animator;
 
+    [SerializeField , Range(0, 1)]
+    private float slowerFactor;
+
     private void Start()
     {
         startingPoint = transform.position;
@@ -70,8 +73,14 @@ public class ChickenController : MonoBehaviour
         //Clamp
         finalSpeed = Mathf.Clamp(finalSpeed, 0, maxSpeed);
 
+
+
         if (canMove)
         {
+            if (carryingEgg)
+            {
+                finalSpeed *= slowerFactor;
+            }
 
             Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * finalSpeed;
             m_rigidbody.MovePosition(m_rigidbody.position + move);
