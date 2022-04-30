@@ -118,7 +118,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f6b476f97a6bc4e9d7263f8129dc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  eggs: 0
+  speed: 0
+  finalSpeed: 0
+  acceleration: 2
+  baseSpeed: 4
+  maxSpeed: 6
+  HRaw: 0
+  VRaw: 0
   playerNum: 1
 --- !u!58 &5433094769072823219
 CircleCollider2D:
