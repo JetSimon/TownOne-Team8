@@ -6,9 +6,7 @@ using UnityEngine;
 public class ChickenController : MonoBehaviour
 {
     public float moveSpeed = 4.0f;
-
-    public bool usesWASD = true;
-    public bool usesArrows = false;
+    public int playerNum = 1;
 
     private Rigidbody2D m_rigidbody;
     private void Awake()
@@ -18,13 +16,7 @@ public class ChickenController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 move = Vector3.zero;
-        if ((Input.GetKey(KeyCode.LeftArrow) && usesArrows) || (Input.GetKey(KeyCode.A) && usesWASD)) move += Vector2.left;
-        if ((Input.GetKey(KeyCode.RightArrow) && usesArrows) || (Input.GetKey(KeyCode.D) && usesWASD)) move += Vector2.right;
-        if ((Input.GetKey(KeyCode.UpArrow) && usesArrows) || (Input.GetKey(KeyCode.W) && usesWASD)) move += Vector2.up;
-        if ((Input.GetKey(KeyCode.DownArrow) && usesArrows) || (Input.GetKey(KeyCode.S) && usesWASD)) move += Vector2.down;
-        move = move.normalized * Time.fixedDeltaTime;
-
+        Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * moveSpeed;
         m_rigidbody.MovePosition(m_rigidbody.position + move);
     }
 
