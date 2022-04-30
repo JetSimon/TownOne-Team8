@@ -6,7 +6,15 @@ using UnityEngine;
 public class ChickenController : MonoBehaviour
 {
     public int eggs;
-    public float moveSpeed = 4.0f;
+    public float speed;
+    public float finalSpeed;
+    public float acceleration = 4f;
+    public float baseSpeed = 4.0f;
+    public float maxSpeed = 6.0f;
+
+    public float HRaw;
+    public float VRaw;
+
     public int playerNum = 1;
     private Vector3 startingPoint;
     private Vector3 initialScale;
@@ -22,7 +30,14 @@ public class ChickenController : MonoBehaviour
     private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
+
+        //Get Raws
+        HRaw = 0;
+        VRaw = 0;
     }
+
+
+
 
     private void FixedUpdate()
     {
@@ -33,6 +48,27 @@ public class ChickenController : MonoBehaviour
 
         }
 
+        if(HRaw != Input.GetAxisRaw($"Horizontal P{playerNum}") || VRaw != Input.GetAxisRaw($"Vertical P{playerNum}"))
+        {
+            //Set Last Raws
+            HRaw = Input.GetAxisRaw($"Horizontal P{playerNum}");
+            VRaw = Input.GetAxisRaw($"Vertical P{playerNum}");
+
+            speed = 0;
+        }
+
+
+        //Calc Speed
+        speed += (acceleration * Time.deltaTime);
+    
+        //Clamp Speed
+        Mathf.Clamp(speed, 0, (maxSpeed - baseSpeed));
+
+        //Calc finalSpeed
+        finalSpeed = speed + baseSpeed;
+
+        //Clamp
+        finalSpeed = Mathf.Clamp(finalSpeed, 0, maxSpeed);
     }
 
     public void OnPlayerJoined()
