@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f6b476f97a6bc4e9d7263f8129dc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggs: 0
+  eggsSecured: 0
   speed: 0
   finalSpeed: 0
   acceleration: 4
@@ -128,6 +128,9 @@ MonoBehaviour:
   HRaw: 0
   VRaw: 0
   playerNum: 1
+  egg: {fileID: 0}
+  carryingEgg: 0
+  slowerFactor: 0
 --- !u!58 &5433094769072823219
 CircleCollider2D:
   m_ObjectHideFlags: 0
