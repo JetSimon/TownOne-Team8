@@ -2,37 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EggGenerating : MonoBehaviour { 
-    public Vector2 WorldUnitsInCamera;
-    public Vector2 WorldToPixelAmount;
+public class EggGenerating : MonoBehaviour {
 
     public GameObject eggPrefab;
     public Camera mainCamera;
-    private const float GENERATE_COOL_DOWN = 3f; // amount of second it takes to generate a new egg
-    private float timeLeft = GENERATE_COOL_DOWN;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Finding Pixel To World Unit Conversion Based On Orthographic Size Of Camera
-        WorldUnitsInCamera.y = mainCamera.orthographicSize * 2;
-        WorldUnitsInCamera.x = WorldUnitsInCamera.y * Screen.width / Screen.height;
 
-        WorldToPixelAmount.x = Screen.width / WorldUnitsInCamera.x;
-        WorldToPixelAmount.y = Screen.height / WorldUnitsInCamera.y;
-    }
+    //The time between spawns
+    public float generationCooldown = 3.0f;
+
+    private float m_elapsed = 0;
 
     // Update is called once per frame
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
+        m_elapsed += Time.deltaTime;
+        if (m_elapsed >= generationCooldown)
         {
-            float cameraWidthHalf = mainCamera.scaledPixelWidth / 2 / WorldToPixelAmount.x;
-            float cameraHeightHalf = mainCamera.scaledPixelHeight / 2 / WorldToPixelAmount.y;
-            Vector3 position = new Vector3(Random.Range(-cameraWidthHalf, cameraWidthHalf), Random.Range(-cameraHeightHalf, cameraHeightHalf), -1);
-            Instantiate(eggPrefab, position, Quaternion.Euler(0, 0, 0), transform);
-            print("egg generated");
-            timeLeft = GENERATE_COOL_DOWN;
+            //Find the corners of the camera in world space
+            float depth = -mainCamera.transform.localPosition.z;
+            Vector2 min = mainCamera.ScreenToWorldPoint(new Vector3(0, 0, depth));
+            Vector2 max = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, depth));
+
+            //Generate a random position interpolated between the corners
+            Vector2 position = new Vector2(
+                Mathf.Lerp(min.x, max.x, Random.Range(0.0f, 1.0f)),
+                Mathf.Lerp(min.y, max.y, Random.Range(0.0f, 1.0f))
+            );
+            
+            //Instantiate the egg, reset the timer
+            Instantiate(eggPrefab, position, Quaternion.identity, null);
+            m_elapsed = 0;
         }
     }
 }
