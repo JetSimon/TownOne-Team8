@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ChickenController : MonoBehaviour
 {
+    public int eggs;
     public float moveSpeed = 4.0f;
     public int playerNum = 1;
 
