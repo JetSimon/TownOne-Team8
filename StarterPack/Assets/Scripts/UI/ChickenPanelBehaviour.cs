@@ -17,7 +17,7 @@ public class ChickenPanelBehaviour : MonoBehaviour
         if (target != null)
         {
             text_playerName.text = $"PLAYER {target.playerNum}";
-            text_eggsCount.text = $"{target.eggs} EGGS";
+            text_eggsCount.text = $"{target.eggsSecured} EGGS";
         }            
     }
 }

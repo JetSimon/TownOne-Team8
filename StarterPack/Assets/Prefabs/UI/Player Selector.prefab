@@ -72,6 +72,7 @@ MonoBehaviour:
   instructionsText: {fileID: 7390970703988250466}
   joinButtonText: {fileID: 4092790180586349512}
   playerImage: {fileID: 5727378209319620655}
+  joined: 0
 --- !u!95 &5573386237497769689
 Animator:
   serializedVersion: 3
@@ -331,7 +332,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5e4e8fcf66e1b4aaa998b40e4903cf22, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84d546f012261401dbdd6aab7f49ce18, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -363,6 +364,7 @@ MonoBehaviour:
   instructionsText: {fileID: 0}
   joinButtonText: {fileID: 0}
   playerImage: {fileID: 5727378209319620655}
+  joined: 0
 --- !u!1 &8776670311475914359
 GameObject:
   m_ObjectHideFlags: 0
