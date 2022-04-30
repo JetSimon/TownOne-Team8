@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5433094769072823219}
   m_Layer: 0
   m_Name: Chicken
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,13 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eggs: 0
-  speed: 0
-  finalSpeed: 0
-  acceleration: 4
-  baseSpeed: 4
-  maxSpeed: 6
-  HRaw: 0
-  VRaw: 0
+  moveSpeed: 4
   playerNum: 1
 --- !u!58 &5433094769072823219
 CircleCollider2D:
