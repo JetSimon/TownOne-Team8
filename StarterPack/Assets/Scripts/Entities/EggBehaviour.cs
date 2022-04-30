@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class EggBehaviour : MonoBehaviour
 {
-    private Animation m_collectAnimation;
+    private Animator m_animator;
     private ChickenController m_collidingChicken;
 
     private void Awake()
     {
-        m_collectAnimation = GetComponent<Animation>();
+        m_animator = GetComponent<Animator>();
     }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.GetComponent<ChickenController>() != null)
         {
             m_collidingChicken = collision.gameObject.GetComponent<ChickenController>();
-            m_collectAnimation.Play();
+            m_animator.SetTrigger("Collected");
         }
     }
 
