@@ -24,7 +24,6 @@ public class EggBehaviour : MonoBehaviour
 
     public void OnEggCollected()
     {
-        m_collidingChicken.PickupEgg();
-        Destroy(gameObject);
+        m_collidingChicken.PickupEgg(gameObject);
     }
 }

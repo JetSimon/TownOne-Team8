@@ -83,8 +83,10 @@ public class ChickenController : MonoBehaviour
         animator.SetBool("Walking", HRaw != 0);
     }
 
-    public void PickupEgg()
+    public void PickupEgg(GameObject egg)
     {
+        egg.transform.SetParent(transform);
+        egg.transform.localPosition = new Vector3(0.0f, 1.75f, 0);
         carryingEgg = true;
         Debug.Log("Picked up egg");
     }
