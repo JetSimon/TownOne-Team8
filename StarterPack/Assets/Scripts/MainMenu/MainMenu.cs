@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-
-    [SerializeField] Canvas mainMenu;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -17,14 +14,5 @@ public class MainMenu : MonoBehaviour
     void Update()
     {
         
-    }
-
-     public void CloseMainMenu()
-    {
-        if(mainMenu)
-        {
-            mainMenu.enabled = false;
-        }
-         
     }
 }

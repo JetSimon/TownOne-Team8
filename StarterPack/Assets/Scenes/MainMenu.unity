@@ -926,6 +926,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 2 Selector
       objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: playerName
+      value: P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: buttonToJoin
+      value: Fire P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: instructions
+      value: ARROWS to move
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: buttonToLeave
+      value: Back P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: playerColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: playerColor.b
+      value: 0.2520915
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: playerColor.g
+      value: 0.2520915
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: playerColor.r
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: joinInstructions
+      value: Press [X] to join!
+      objectReference: {fileID: 0}
     - target: {fileID: 7923051817909822766, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1017,6 +1053,49 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7923051817909822766, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
   m_PrefabInstance: {fileID: 1833423486}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1848466294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1848466296}
+  - component: {fileID: 1848466295}
+  m_Layer: 0
+  m_Name: Main Menu Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1848466295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848466294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a52642d4b79c4f647970fd01e661d005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1848466296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848466294}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.9470827, y: 0.27934203, z: -0.23021296}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7808911973831501977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1027,6 +1106,38 @@ PrefabInstance:
     - target: {fileID: 1917924692434939533, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
       propertyPath: m_Name
       value: Player 1 Selector
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: playerName
+      value: P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: buttonToJoin
+      value: Fire P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: instructions
+      value: WASD to move
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: buttonToLeave
+      value: Back P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: playerColor.b
+      value: 0.007843138
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: playerColor.g
+      value: 0.9215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: playerColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
+      propertyPath: joinInstructions
+      value: Press [X] to join!
       objectReference: {fileID: 0}
     - target: {fileID: 7923051817909822766, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
       propertyPath: m_Pivot.x
