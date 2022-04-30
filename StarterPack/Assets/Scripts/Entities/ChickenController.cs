@@ -41,13 +41,6 @@ public class ChickenController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (canMove)
-        {
-            Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * speed;
-            m_rigidbody.MovePosition(m_rigidbody.position + move);
-
-        }
-
         if(HRaw != Input.GetAxisRaw($"Horizontal P{playerNum}") || VRaw != Input.GetAxisRaw($"Vertical P{playerNum}"))
         {
             //Set Last Raws
@@ -56,7 +49,6 @@ public class ChickenController : MonoBehaviour
 
             speed = 0;
         }
-
 
         //Calc Speed
         speed += (acceleration * Time.deltaTime);
@@ -69,6 +61,13 @@ public class ChickenController : MonoBehaviour
 
         //Clamp
         finalSpeed = Mathf.Clamp(finalSpeed, 0, maxSpeed);
+
+        if (canMove)
+        {
+            Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * finalSpeed;
+            m_rigidbody.MovePosition(m_rigidbody.position + move);
+
+        }
     }
 
     public void OnPlayerJoined()
