@@ -41,15 +41,19 @@ public class PlayerSelector : MonoBehaviour
         if(Input.GetButtonDown(buttonToJoin))
         {
             if(!joined)
-            {
+            {   
+                GetComponent<AudioSource>().pitch = Random.Range(0.9f,1.1f);
+                GetComponent<AudioSource>().Play();
                 animator.SetTrigger("Player Joined");
                 joined = true;
                 UpdateUI();
             }
         }
 
-        if(Input.GetButtonDown(buttonToLeave))
+        if(Input.GetButtonDown(buttonToLeave) && joined)
         {
+            //THIS IS VERY BAD ITS JUST FOR NOW OK
+            GameObject.Find("Main Menu Manager").GetComponent<AudioSource>().Play();
             joined = false;
             UpdateUI();
         }
