@@ -20,6 +20,7 @@ public class ChickenController : MonoBehaviour
     private Vector3 initialScale;
     private bool canMove = true;
 
+    public GameObject egg;
     public bool carryingEgg = false;
 
     private Rigidbody2D m_rigidbody;
@@ -87,8 +88,15 @@ public class ChickenController : MonoBehaviour
     {
         egg.transform.SetParent(transform);
         egg.transform.localPosition = new Vector3(0.0f, 1.75f, 0);
+
+        this.egg = egg;
         carryingEgg = true;
         Debug.Log("Picked up egg");
+    }
+    public void DepositEgg(GameObject chute)
+    {
+        egg.GetComponent<EggBehaviour>().boundDepositChute = chute;
+        egg.GetComponent<EggBehaviour>().animator.SetTrigger("Deposited");
     }
 
     public void Die()

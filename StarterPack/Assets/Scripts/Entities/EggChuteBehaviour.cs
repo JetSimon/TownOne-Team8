@@ -11,10 +11,6 @@ public class EggChuteBehaviour : MonoBehaviour
 
         var chicken = other.gameObject.GetComponent<ChickenController>();
         if (chicken != null && chicken.playerNum == requiredPlayerNum && chicken.carryingEgg)
-        {
-            chicken.carryingEgg = false;
-            chicken.eggsSecured++;
-            Debug.Log("Dropped off egg");
-        }
+            chicken.DepositEgg(gameObject);
     }
 }

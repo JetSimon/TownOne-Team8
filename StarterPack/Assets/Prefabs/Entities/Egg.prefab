@@ -144,6 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65db9f85e71a8154cad57bf9694bda96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 3673144745513970954}
+  boundDepositChute: {fileID: 0}
 --- !u!95 &3673144745513970954
 Animator:
   serializedVersion: 3

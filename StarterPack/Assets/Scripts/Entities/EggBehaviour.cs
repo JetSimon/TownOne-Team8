@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class EggBehaviour : MonoBehaviour
 {
-    private Animator m_animator;
+    public Animator animator;
     private ChickenController m_collidingChicken;
+    public GameObject boundDepositChute;
 
     private void Awake()
     {
-        m_animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -18,12 +19,19 @@ public class EggBehaviour : MonoBehaviour
         if(chicken != null && !chicken.carryingEgg)
         {
             m_collidingChicken = collision.gameObject.GetComponent<ChickenController>();
-            m_animator.SetTrigger("Collected");
+            animator.SetTrigger("Collected");
         }
     }
 
     public void OnEggCollected()
     {
         m_collidingChicken.PickupEgg(gameObject);
+    }
+    public void OnEggDeposited()
+    {
+        transform.SetParent(boundDepositChute.transform);
+        transform.localPosition = Vector3.up * 0.5f;
+        m_collidingChicken.eggsSecured++;
+        m_collidingChicken.carryingEgg = false;
     }
 }
