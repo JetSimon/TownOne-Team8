@@ -82,9 +82,9 @@ public class ChickenController : MonoBehaviour
 
     public void Die()
     {
-        if(eggs > 0)
+        if(eggsSecured > 0)
         {
-            eggs = 0;
+            eggsSecured = 0;
         }
         transform.position = startingPoint;
         transform.localScale = initialScale;
