@@ -126,7 +126,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -144,8 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65db9f85e71a8154cad57bf9694bda96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectAnimation: {fileID: 7400000, guid: a3382f66ab5422a47871ed3b40369d8c, type: 2}
-  spawnAnimation: {fileID: 7400000, guid: 4a7adc0a78c70df42a08fdbb96a366e2, type: 2}
 --- !u!95 &3673144745513970954
 Animator:
   serializedVersion: 3
