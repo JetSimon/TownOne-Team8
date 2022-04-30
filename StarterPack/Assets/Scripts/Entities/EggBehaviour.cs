@@ -6,6 +6,8 @@ public class EggBehaviour : MonoBehaviour
 {
     public Animator animator;
     private ChickenController m_collidingChicken;
+
+    public GameObject boundSourceHatch;
     public GameObject boundDepositChute;
 
     private void Awake()
@@ -25,6 +27,7 @@ public class EggBehaviour : MonoBehaviour
 
     public void OnEggCollected()
     {
+        boundSourceHatch.GetComponent<HatchBehaviour>().containsEgg = false;
         m_collidingChicken.PickupEgg(gameObject);
     }
     public void OnEggDeposited()
@@ -33,5 +36,6 @@ public class EggBehaviour : MonoBehaviour
         transform.localPosition = Vector3.up * 0.5f;
         m_collidingChicken.eggsSecured++;
         m_collidingChicken.carryingEgg = false;
+        m_collidingChicken.egg = null;
     }
 }
