@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ChickenController : MonoBehaviour
 {
-    public int eggs;
+    public int eggsSecured;
     public float speed;
     public float finalSpeed;
     public float acceleration = 4f;
@@ -20,7 +20,12 @@ public class ChickenController : MonoBehaviour
     private Vector3 initialScale;
     private bool canMove = true;
 
+    public GameObject carriedEgg;
+
     private Rigidbody2D m_rigidbody;
+    private SpriteRenderer spriteRenderer;
+
+    private Animator animator;
 
     private void Start()
     {
@@ -30,6 +35,8 @@ public class ChickenController : MonoBehaviour
     private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         //Get Raws
         HRaw = 0;
@@ -64,22 +71,31 @@ public class ChickenController : MonoBehaviour
 
         if (canMove)
         {
+
             Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * finalSpeed;
             m_rigidbody.MovePosition(m_rigidbody.position + move);
 
         }
+
+        if(HRaw > 0) spriteRenderer.flipX = true;
+        if(HRaw < 0) spriteRenderer.flipX = false;
+
+        animator.SetBool("Walking", HRaw != 0);
     }
 
-    public void OnPlayerJoined()
+    public void DepositEgg(GameObject chute)
     {
-        Debug.Log("Hello?");
+        carriedEgg.GetComponent<EggBehaviour>().boundDepositChute = chute;
+        carriedEgg.GetComponent<EggBehaviour>().animator.SetTrigger("Deposited");
+
+        Debug.Log("Deposited egg");
     }
 
     public void Die()
     {
-        if(eggs > 0)
+        if(eggsSecured > 0)
         {
-            eggs = 0;
+            eggsSecured = 0;
         }
         transform.position = startingPoint;
         transform.localScale = initialScale;

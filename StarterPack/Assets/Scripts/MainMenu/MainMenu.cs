@@ -85,6 +85,8 @@ public class MainMenu : MonoBehaviour
 
     void ChangeButton(int delta)
     {
+        GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
+        GetComponent<AudioSource>().Play();
         buttons[buttonIndex].text = buttons[buttonIndex].text.Replace("- ", "");
         buttons[buttonIndex].text = buttons[buttonIndex].text.Replace(" -", "");
         buttons[buttonIndex].fontSize = 109;
@@ -97,11 +99,14 @@ public class MainMenu : MonoBehaviour
 
     void ChangeLevel(int delta)
     {
+        GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
+        GetComponent<AudioSource>().Play();
         currentLevelIndex += delta;
         if(currentLevelIndex < 0) currentLevelIndex = levelNames.Length - 1;
         currentLevelIndex = currentLevelIndex % (levelNames.Length);
         currentLevel = levelNames[currentLevelIndex];
         UpdateUI();
+        stageText.GetComponent<Animator>().SetTrigger("Pop Up");
     }
 
     void UpdateUI()
