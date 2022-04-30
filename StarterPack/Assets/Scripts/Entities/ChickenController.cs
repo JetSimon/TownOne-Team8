@@ -43,7 +43,7 @@ public class ChickenController : MonoBehaviour
     {
         if (canMove)
         {
-            Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * moveSpeed;
+            Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * finalSpeed;
             m_rigidbody.MovePosition(m_rigidbody.position + move);
 
         }
