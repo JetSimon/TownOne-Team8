@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour
     {
         if(timeLeft > 0)
         {
-            mText.text = timeLeft.ToString("0.00");
+            mText.text = timeLeft.ToString("0.0");
             timeLeft -= Time.deltaTime;
         }
         else

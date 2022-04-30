@@ -10,6 +10,8 @@ public class EggBehaviour : MonoBehaviour
     public GameObject boundSourceHatch;
     public GameObject boundDepositChute;
 
+    public bool pickedUp = false;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -18,9 +20,11 @@ public class EggBehaviour : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         var chicken = collision.gameObject.GetComponent<ChickenController>();
-        if(chicken != null && !chicken.carryingEgg)
+        if(!pickedUp && chicken != null && chicken.carriedEgg == null)
         {
+            pickedUp = true;
             m_collidingChicken = collision.gameObject.GetComponent<ChickenController>();
+            m_collidingChicken.carriedEgg = gameObject;
             animator.SetTrigger("Collected");
         }
     }
@@ -28,14 +32,15 @@ public class EggBehaviour : MonoBehaviour
     public void OnEggCollected()
     {
         boundSourceHatch.GetComponent<HatchBehaviour>().containsEgg = false;
-        m_collidingChicken.PickupEgg(gameObject);
+
+        transform.SetParent(m_collidingChicken.transform);
+        transform.localPosition = new Vector3(0.0f, 1.75f, 0);
     }
     public void OnEggDeposited()
     {
         transform.SetParent(boundDepositChute.transform);
         transform.localPosition = Vector3.up * 0.5f;
         m_collidingChicken.eggsSecured++;
-        m_collidingChicken.carryingEgg = false;
-        m_collidingChicken.egg = null;
+        m_collidingChicken.carriedEgg = null;
     }
 }

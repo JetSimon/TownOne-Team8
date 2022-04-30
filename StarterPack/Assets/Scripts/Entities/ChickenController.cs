@@ -20,8 +20,7 @@ public class ChickenController : MonoBehaviour
     private Vector3 initialScale;
     private bool canMove = true;
 
-    public GameObject egg;
-    public bool carryingEgg = false;
+    public GameObject carriedEgg;
 
     private Rigidbody2D m_rigidbody;
     private SpriteRenderer spriteRenderer;
@@ -84,19 +83,12 @@ public class ChickenController : MonoBehaviour
         animator.SetBool("Walking", HRaw != 0);
     }
 
-    public void PickupEgg(GameObject egg)
-    {
-        egg.transform.SetParent(transform);
-        egg.transform.localPosition = new Vector3(0.0f, 1.75f, 0);
-
-        this.egg = egg;
-        carryingEgg = true;
-        Debug.Log("Picked up egg");
-    }
     public void DepositEgg(GameObject chute)
     {
-        egg.GetComponent<EggBehaviour>().boundDepositChute = chute;
-        egg.GetComponent<EggBehaviour>().animator.SetTrigger("Deposited");
+        carriedEgg.GetComponent<EggBehaviour>().boundDepositChute = chute;
+        carriedEgg.GetComponent<EggBehaviour>().animator.SetTrigger("Deposited");
+
+        Debug.Log("Deposited egg");
     }
 
     public void Die()
