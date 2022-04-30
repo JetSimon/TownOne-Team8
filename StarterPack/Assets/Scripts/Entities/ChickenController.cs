@@ -12,6 +12,8 @@ public class ChickenController : MonoBehaviour
     public float baseSpeed = 4.0f;
     public float maxSpeed = 6.0f;
 
+    public float stunTime = 2.00f;
+
     public float HRaw;
     public float VRaw;
 
@@ -21,6 +23,7 @@ public class ChickenController : MonoBehaviour
     private bool canMove = true;
 
     public GameObject carriedEgg;
+    public bool stunned;
 
     private Rigidbody2D m_rigidbody;
     private SpriteRenderer spriteRenderer;
@@ -109,5 +112,32 @@ public class ChickenController : MonoBehaviour
     public void disableMove()
     {
         canMove = false;
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        var otherChicken = collision.gameObject.GetComponent<ChickenController>();
+        if(otherChicken != null)
+        {
+            if(carriedEgg == null && otherChicken.carriedEgg != null)
+            {
+                carriedEgg = otherChicken.carriedEgg;
+                otherChicken.carriedEgg = null;
+                carriedEgg.transform.SetParent(transform);
+                carriedEgg.transform.localPosition = new Vector3(0.0f, 1.75f, 0);
+            }
+        }
+    }
+
+    private IEnumerator StunnedCoroutine()
+    {
+        float t = 0;
+        while(t <= 0)
+        {
+
+            t += Time.deltaTime;
+            yield return null;
+        }
+        transform.localScale = Vector3.one;
     }
 }

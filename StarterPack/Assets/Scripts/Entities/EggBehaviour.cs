@@ -32,7 +32,6 @@ public class EggBehaviour : MonoBehaviour
     public void OnEggCollected()
     {
         boundSourceHatch.GetComponent<HatchBehaviour>().containsEgg = false;
-
         transform.SetParent(m_collidingChicken.transform);
         transform.localPosition = new Vector3(0.0f, 1.75f, 0);
     }
