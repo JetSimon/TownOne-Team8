@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ChickenController : MonoBehaviour
 {
-    public int eggs;
+    public int eggsSecured;
     public float speed;
     public float finalSpeed;
     public float acceleration = 4f;
@@ -16,6 +16,8 @@ public class ChickenController : MonoBehaviour
     public float VRaw;
 
     public int playerNum = 1;
+
+    public bool carryingEgg = false;
 
     private Rigidbody2D m_rigidbody;
     private void Awake()
@@ -59,8 +61,9 @@ public class ChickenController : MonoBehaviour
         m_rigidbody.MovePosition(m_rigidbody.position + move);
     }
 
-    public void OnPlayerJoined()
+    public void PickupEgg()
     {
-        Debug.Log("Hello?");
+        carryingEgg = true;
+        Debug.Log("Picked up egg");
     }
 }

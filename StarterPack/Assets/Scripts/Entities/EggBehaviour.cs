@@ -14,7 +14,8 @@ public class EggBehaviour : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<ChickenController>() != null)
+        var chicken = collision.gameObject.GetComponent<ChickenController>();
+        if(chicken != null && !chicken.carryingEgg)
         {
             m_collidingChicken = collision.gameObject.GetComponent<ChickenController>();
             m_animator.SetTrigger("Collected");
@@ -23,7 +24,7 @@ public class EggBehaviour : MonoBehaviour
 
     public void OnEggCollected()
     {
-        m_collidingChicken.eggs++;
+        m_collidingChicken.PickupEgg();
         Destroy(gameObject);
     }
 }

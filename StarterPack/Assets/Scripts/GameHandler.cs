@@ -30,14 +30,14 @@ public class GameHandler : MonoBehaviour
     void LoadChickens()
     {
         chickenControllers = GameObject.FindObjectsOfType<ChickenController>();
-        Debug.Log($"There are {chickenControllers.Length} chickens on screen rn man");
+        Debug.Log($"There are {chickenControllers.Length} chickens in the match");
     }
 
     void AddUpPoints()
     {
         foreach(ChickenController player in chickenControllers)
         {
-            totalPoints[player.playerNum-1] += player.eggs;
+            totalPoints[player.playerNum-1] += player.eggsSecured;
         }
     }
 
