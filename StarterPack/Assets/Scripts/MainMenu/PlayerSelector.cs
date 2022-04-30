@@ -17,15 +17,22 @@ public class PlayerSelector : MonoBehaviour
     [SerializeField]
     private Image playerImage;
 
+    [SerializeField]
     private bool joined = false;
 
+    private Animator animator;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        animator = GetComponent<Animator>();
         playerNameText.text = playerName;
         instructionsText.text = instructions;
         joinButtonText.text = joinInstructions;
+    }
 
+    void Start()
+    {
         UpdateUI();
     }
 
@@ -33,8 +40,12 @@ public class PlayerSelector : MonoBehaviour
     {
         if(Input.GetButtonDown(buttonToJoin))
         {
-            joined = true;
-            UpdateUI();
+            if(!joined)
+            {
+                animator.SetTrigger("Player Joined");
+                joined = true;
+                UpdateUI();
+            }
         }
 
         if(Input.GetButtonDown(buttonToLeave))
