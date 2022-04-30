@@ -13,7 +13,11 @@ public class MainMenu : MonoBehaviour
     private string[] levelNames;
 
     [SerializeField]
-    private Text startButton, stageText;
+    private Text[] buttons;
+    private int buttonIndex = 0;
+
+    [SerializeField]
+    private Text stageText;
 
     [SerializeField]
     private bool canPlay = false;
@@ -21,6 +25,8 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         currentLevel = levelNames[currentLevelIndex];
+        ChangeButton(0);
+        UpdateUI();
     }
 
     // Update is called once per frame
@@ -32,9 +38,18 @@ public class MainMenu : MonoBehaviour
             UpdateUI();
         }
 
-        if(canPlay && Input.GetButtonDown("Submit"))
+        if(Input.GetButtonDown("Submit"))
         {
-            StartGame();
+            if(buttonIndex == 0 && canPlay)
+            {
+                StartGame();
+            }
+            else if(buttonIndex == 1)
+            {
+                Debug.Log("Quitting game");
+                Application.Quit();
+            }
+            
         }
 
         //Fix this bs later
@@ -48,6 +63,18 @@ public class MainMenu : MonoBehaviour
             ChangeLevel(1);
         }
 
+        //Fix this bs later
+        if (Input.GetKeyDown("down") || Input.GetKeyDown("s"))
+        {
+            ChangeButton(1);
+        }
+
+        //Fix this bs later
+        if (Input.GetKeyDown("up") || Input.GetKeyDown("w"))
+        {
+            ChangeButton(-1);
+        }
+
     }
 
     void StartGame()
@@ -56,17 +83,28 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(currentLevel);
     }
 
+    void ChangeButton(int delta)
+    {
+        buttons[buttonIndex].text = buttons[buttonIndex].text.Replace("- ", "");
+        buttons[buttonIndex].text = buttons[buttonIndex].text.Replace(" -", "");
+        buttonIndex += delta;
+        if(buttonIndex < 0) buttonIndex = buttons.Length - 1;
+        buttonIndex = buttonIndex % (buttons.Length);
+        buttons[buttonIndex].text = $"- {buttons[buttonIndex].text} -";
+    }
+
     void ChangeLevel(int delta)
     {
         currentLevelIndex += delta;
-        currentLevelIndex = currentLevelIndex % (levelNames.Length - 1);
+        if(currentLevelIndex < 0) currentLevelIndex = levelNames.Length - 1;
+        currentLevelIndex = currentLevelIndex % (levelNames.Length);
         currentLevel = levelNames[currentLevelIndex];
         UpdateUI();
     }
 
     void UpdateUI()
     {
-        startButton.color = canPlay ? Color.white : Color.grey;
+        buttons[0].color = canPlay ? Color.white : Color.grey;
         stageText.text = $"< {currentLevel.ToUpper()} >";
     }
 
