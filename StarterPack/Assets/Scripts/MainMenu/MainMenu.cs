@@ -87,10 +87,12 @@ public class MainMenu : MonoBehaviour
     {
         buttons[buttonIndex].text = buttons[buttonIndex].text.Replace("- ", "");
         buttons[buttonIndex].text = buttons[buttonIndex].text.Replace(" -", "");
+        buttons[buttonIndex].fontSize = 109;
         buttonIndex += delta;
         if(buttonIndex < 0) buttonIndex = buttons.Length - 1;
         buttonIndex = buttonIndex % (buttons.Length);
         buttons[buttonIndex].text = $"- {buttons[buttonIndex].text} -";
+        buttons[buttonIndex].fontSize = 115;
     }
 
     void ChangeLevel(int delta)
