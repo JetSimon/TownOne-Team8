@@ -1373,6 +1373,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5884397334428331493, guid: 097509e4b81c2468a8d8b072f4876e65, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6148792597052215413, guid: 097509e4b81c2468a8d8b072f4876e65, type: 3}
       propertyPath: m_Name
       value: Egg

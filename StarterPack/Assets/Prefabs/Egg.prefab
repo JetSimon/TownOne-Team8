@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 753784627683459734}
   - component: {fileID: 6314194217838300928}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,6 +92,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6762698041512196291}
   - component: {fileID: 5884397334428331493}
+  - component: {fileID: 1590908520262674945}
+  - component: {fileID: 2548208146108763902}
   m_Layer: 0
   m_Name: Egg
   m_TagString: Untagged
@@ -130,3 +132,31 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1590908520262674945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148792597052215413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65db9f85e71a8154cad57bf9694bda96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!111 &2548208146108763902
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148792597052215413}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a3382f66ab5422a47871ed3b40369d8c, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a3382f66ab5422a47871ed3b40369d8c, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
