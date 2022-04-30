@@ -41,6 +41,11 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    public void EndGame()
+    {
+        Debug.Log("<color=red>GAME OVER SCREEN NOT IN GAME YET, GOING BACK TO MAINMENU</color>");
+        SceneManager.LoadScene("MainMenu");
+    }
     void Start()
     {
         LoadChickens();
