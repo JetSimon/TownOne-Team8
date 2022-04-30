@@ -12,7 +12,9 @@ public class ChickenController : MonoBehaviour
     public float baseSpeed = 4.0f;
     public float maxSpeed = 6.0f;
 
-    public float stunTime = 2.00f;
+    public float eggHoldSpeedModifier = 0.9f;
+
+    public float stunDuration = 2.00f;
 
     public float HRaw;
     public float VRaw;
@@ -68,13 +70,11 @@ public class ChickenController : MonoBehaviour
 
         //Calc finalSpeed
         finalSpeed = speed + baseSpeed;
-
-        //Clamp
+        finalSpeed *= carriedEgg != null ? eggHoldSpeedModifier : 1.0f;
         finalSpeed = Mathf.Clamp(finalSpeed, 0, maxSpeed);
 
-        if (canMove)
+        if (canMove && !stunned)
         {
-
             Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * finalSpeed;
             m_rigidbody.MovePosition(m_rigidbody.position + move);
 
@@ -84,6 +84,11 @@ public class ChickenController : MonoBehaviour
         if(HRaw < 0) spriteRenderer.flipX = false;
 
         animator.SetBool("Walking", HRaw != 0);
+
+
+        RigidbodyConstraints2D normalConstraints = RigidbodyConstraints2D.FreezeRotation;
+        RigidbodyConstraints2D stunnedConstraints = normalConstraints | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+        m_rigidbody.constraints = stunned ? stunnedConstraints : normalConstraints;
     }
 
     public void DepositEgg(GameObject chute)
@@ -119,25 +124,39 @@ public class ChickenController : MonoBehaviour
         var otherChicken = collision.gameObject.GetComponent<ChickenController>();
         if(otherChicken != null)
         {
-            if(carriedEgg == null && otherChicken.carriedEgg != null)
+            if(carriedEgg == null && otherChicken.carriedEgg != null && !stunned)
             {
                 carriedEgg = otherChicken.carriedEgg;
-                otherChicken.carriedEgg = null;
+                carriedEgg.GetComponent<EggBehaviour>().boundChicken = this;
                 carriedEgg.transform.SetParent(transform);
                 carriedEgg.transform.localPosition = new Vector3(0.0f, 1.75f, 0);
+
+                otherChicken.carriedEgg = null;
+                otherChicken.Stun();
             }
         }
+    }
+    public void Stun()
+    {
+        StartCoroutine(StunnedCoroutine());
     }
 
     private IEnumerator StunnedCoroutine()
     {
-        float t = 0;
-        while(t <= 0)
-        {
+        animator.SetTrigger("Hurt");
 
-            t += Time.deltaTime;
+        stunned = true;
+        Color initialColor = spriteRenderer.color;
+
+        float t = 0;
+        while(t <= 1)
+        {
+            spriteRenderer.color = Color.Lerp(initialColor, Color.grey, Mathf.Round(Mathf.Abs(Mathf.Sin(t * 20))));
+            t += Time.deltaTime / stunDuration;
             yield return null;
         }
-        transform.localScale = Vector3.one;
+        spriteRenderer.color = initialColor;
+        stunned = false;
+
     }
 }
