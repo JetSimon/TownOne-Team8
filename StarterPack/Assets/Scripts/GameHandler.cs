@@ -22,7 +22,12 @@ public class GameHandler : MonoBehaviour
         gameHandler = this;
     }
 
-    void OnSceneLoaded()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        LoadChickens();
+    }
+
+    void LoadChickens()
     {
         chickenControllers = GameObject.FindObjectsOfType<ChickenController>();
         Debug.Log($"There are {chickenControllers.Length} chickens on screen rn man");
@@ -38,7 +43,7 @@ public class GameHandler : MonoBehaviour
 
     void Start()
     {
-        OnSceneLoaded();
+        LoadChickens();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 }
