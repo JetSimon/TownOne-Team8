@@ -70,8 +70,8 @@ public class ChickenController : MonoBehaviour
 
         //Calc finalSpeed
         finalSpeed = speed + baseSpeed;
-        finalSpeed *= carriedEgg != null ? eggHoldSpeedModifier : 1.0f;
         finalSpeed = Mathf.Clamp(finalSpeed, 0, maxSpeed);
+        finalSpeed *= carriedEgg != null ? eggHoldSpeedModifier : 1.0f;
 
         if (canMove && !stunned)
         {
@@ -131,7 +131,7 @@ public class ChickenController : MonoBehaviour
                 carriedEgg.transform.SetParent(transform);
                 carriedEgg.transform.localPosition = new Vector3(0.0f, 1.75f, 0);
 
-                otherChicken.carriedEgg = null;
+                                otherChicken.carriedEgg = null;
                 otherChicken.Stun();
             }
         }
