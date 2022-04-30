@@ -8,7 +8,7 @@ public class ChickenController : MonoBehaviour
     public int eggs;
     public float speed;
     public float finalSpeed;
-    public float acceleration = 2f;
+    public float acceleration = 4f;
     public float baseSpeed = 4.0f;
     public float maxSpeed = 6.0f;
 
@@ -44,7 +44,12 @@ public class ChickenController : MonoBehaviour
 
 
         //Calc Speed
-        speed += Mathf.Clamp((acceleration * Time.deltaTime), 0, (maxSpeed - baseSpeed));
+        speed += (acceleration * Time.deltaTime);
+    
+        //Clamp Speed
+        Mathf.Clamp(speed, 0, (maxSpeed - baseSpeed));
+
+        //Calc finalSpeed
         finalSpeed = speed + baseSpeed;
 
         //Clamp

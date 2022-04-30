@@ -121,7 +121,7 @@ MonoBehaviour:
   eggs: 0
   speed: 0
   finalSpeed: 0
-  acceleration: 2
+  acceleration: 4
   baseSpeed: 4
   maxSpeed: 6
   HRaw: 0
