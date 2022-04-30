@@ -27,4 +27,9 @@ public class ChickenController : MonoBehaviour
 
         m_rigidbody.MovePosition(m_rigidbody.position + move);
     }
+
+    public void OnPlayerJoined()
+    {
+        Debug.Log("Hello?");
+    }
 }
