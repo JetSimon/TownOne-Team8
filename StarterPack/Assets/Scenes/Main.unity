@@ -135,6 +135,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1825732508679947721, guid: 08fedad86fd36cd498483d098e0a0c1d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825732508679947721, guid: 08fedad86fd36cd498483d098e0a0c1d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 310
+      objectReference: {fileID: 0}
     - target: {fileID: 2420148512949465114, guid: 08fedad86fd36cd498483d098e0a0c1d, type: 3}
       propertyPath: m_Name
       value: GameHUD
