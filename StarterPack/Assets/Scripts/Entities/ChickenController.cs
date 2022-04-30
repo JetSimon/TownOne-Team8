@@ -16,10 +16,19 @@ public class ChickenController : MonoBehaviour
     public float VRaw;
 
     public int playerNum = 1;
+    private Vector3 startingPoint;
+    private Vector3 initialScale;
+    private bool canMove = true;
 
     public bool carryingEgg = false;
 
     private Rigidbody2D m_rigidbody;
+
+    private void Start()
+    {
+        startingPoint = transform.position;
+        initialScale = transform.localScale;
+    }
     private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
@@ -34,7 +43,6 @@ public class ChickenController : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         if(HRaw != Input.GetAxisRaw($"Horizontal P{playerNum}") || VRaw != Input.GetAxisRaw($"Vertical P{playerNum}"))
         {
             //Set Last Raws
@@ -43,7 +51,6 @@ public class ChickenController : MonoBehaviour
 
             speed = 0;
         }
-
 
         //Calc Speed
         speed += (acceleration * Time.deltaTime);
@@ -57,13 +64,37 @@ public class ChickenController : MonoBehaviour
         //Clamp
         finalSpeed = Mathf.Clamp(finalSpeed, 0, maxSpeed);
 
-        Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * finalSpeed;
-        m_rigidbody.MovePosition(m_rigidbody.position + move);
+        if (canMove)
+        {
+            Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * finalSpeed;
+            m_rigidbody.MovePosition(m_rigidbody.position + move);
+
+        }
     }
 
     public void PickupEgg()
     {
         carryingEgg = true;
         Debug.Log("Picked up egg");
+    }
+
+    public void Die()
+    {
+        if(eggs > 0)
+        {
+            eggs = 0;
+        }
+        transform.position = startingPoint;
+        transform.localScale = initialScale;
+    }
+
+    public void enableMove()
+    {
+        canMove = true;
+    }
+
+    public void disableMove()
+    {
+        canMove = false;
     }
 }
