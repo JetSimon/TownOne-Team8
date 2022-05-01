@@ -53,7 +53,14 @@ public class Trapdoor : MonoBehaviour
             CheckOverlaps();
         }
 
-        if (grinding == true)
+        foreach (GameObject overlap in overlaps)
+        {
+            if(!disableCollision)
+            {
+                killPlayer();
+            }
+        }
+
         {
             dyingPlayer.GetComponent<ChickenController>().disableMove();
 
@@ -69,7 +76,6 @@ public class Trapdoor : MonoBehaviour
                 {
                     pendingDeath = true;
                     overlaps.Remove(dyingPlayer);
-                    Invoke("killPlayer", 2f);
                 }
 
             }
