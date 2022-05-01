@@ -46,7 +46,7 @@ public class GameHandler : MonoBehaviour
         audioManagerTransform = GameObject.Find("AudioManager").transform;
         if(audioManagerTransform)
         {
-            PlaySound("Music0" + Random.Range(1,4));
+            PlaySound("Music0" + Random.Range(1,6));
         }
     }
 
