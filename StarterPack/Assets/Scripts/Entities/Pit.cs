@@ -38,5 +38,6 @@ public class Pit : MonoBehaviour
         collider.transform.position = transform.position;
         collider.GetComponent<ChickenController>().disableMove();
         shrink = true;
+        GameHandler.Instance.PlaySound("Pit");
     }
 }

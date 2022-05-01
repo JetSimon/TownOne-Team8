@@ -2,43 +2,92 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameHandler : MonoBehaviour
 {
-    public static GameHandler gameHandler;
+
+    private Transform audioManagerTransform;
+
+    [SerializeField]
+    public string[] levelNames;
+    public static GameHandler Instance { get; private set; }
     public float eggSpawnInterval = 10;
+    public int maxEggsInScene = 1;
 
     private int[] totalPoints = {0,0};
 
-    private ChickenController[] chickenControllers;
-    private HatchBehaviour[] spawnHatches;
+    public ChickenController[] chickenControllers;
+    public HatchBehaviour[] spawnHatches;
+    public EggChuteBehaviour[] eggChutes;
 
     private float eggSpawnElapsed = 0;
 
+    public bool[] activePlayers = {false, false, false, false};
+
+    public string lastLevelPlayed = "";
+
     void Awake()
     {
-        if(gameHandler != null)
+        if(Instance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
 
-        gameHandler = this;
+        DontDestroyOnLoad(gameObject);
+
+        Instance = this;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadEntities();
+        audioManagerTransform = GameObject.Find("AudioManager").transform;
+        if(audioManagerTransform)
+        {
+            PlaySound("Music0" + Random.Range(1,4));
+        }
+    }
+
+    public void PlaySound(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Play();
+    }
+
+    public void PlaySoundWithRandomPitch(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.1f);
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Play();
+    }
+
+    public void StopSound(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Stop();
+    }
+
+    public void StopAllSounds()
+    {
+        foreach(Transform t in audioManagerTransform)
+        {
+            t.GetComponent<AudioSource>().Stop();
+        }
     }
 
     void LoadEntities()
     {
         chickenControllers = FindObjectsOfType<ChickenController>();
-        Debug.Log($"There are {chickenControllers.Length} chickens in the match");
-
         spawnHatches = FindObjectsOfType<HatchBehaviour>();
-        Debug.Log($"There are {spawnHatches.Length} egg spawn hatches in the match");
+        eggChutes = FindObjectsOfType<EggChuteBehaviour>();
 
+        foreach (var controller in chickenControllers)
+            controller.gameObject.SetActive(activePlayers[controller.playerNum - 1]);
+
+        foreach (var chute in eggChutes)
+            chute.gameObject.SetActive(activePlayers[chute.requiredPlayerNum - 1]);
     }
 
     void AddUpPoints()
@@ -49,11 +98,57 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    public void SetActivePlayers(bool[] arr)
+    {
+        activePlayers = arr;
+    }
+
     public void EndGame()
     {
-        Debug.Log("<color=red>GAME OVER SCREEN NOT IN GAME YET, GOING BACK TO MAINMENU</color>");
-        SceneManager.LoadScene("MainMenu");
+        StopAllSounds();
+        GameHandler.Instance.PlaySound("LevelComplete");
+        int winnerNumber = 0;
+        int winnerPoints = 0;
+        Color winnerColor = Color.white;
+        bool tied = false;
+
+        foreach(ChickenController player in chickenControllers)
+        {
+            if(player.eggsSecured > winnerPoints)
+            {
+                tied = false;
+                winnerNumber = player.playerNum;
+                winnerPoints = player.eggsSecured;
+                winnerColor = player.GetPlayerColor();
+            }
+            else if(player.eggsSecured == winnerPoints)
+            {
+                tied = true;
+            }
+        }
+
+        if(tied)
+        {
+            winnerColor = Color.white;
+            winnerNumber = -1;
+        }
+
+        GameObject.Find("GameHUD").GetComponent<GameHud>().ShowWinner(winnerNumber, winnerColor);
+        
+        
     }
+
+    public void LoadRandomLevel()
+    {
+        int index = Random.Range(0, levelNames.Length);
+        if(levelNames[index] == lastLevelPlayed)
+        {
+            index = (index + 1) % levelNames.Length;
+        }
+        lastLevelPlayed = levelNames[index];
+        SceneManager.LoadScene(levelNames[index]);
+    }
+
     void Start()
     {
         LoadEntities();
@@ -62,20 +157,29 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown("m"))
+        {
+            AudioListener.volume = AudioListener.volume == 0 ? 1f : 0;
+        }
+
         eggSpawnElapsed += Time.deltaTime;
         if(eggSpawnElapsed >= eggSpawnInterval)
         {
             //Try to spawn an egg at a hatch
-            List<HatchBehaviour> hatches = new List<HatchBehaviour>(spawnHatches);
-            while(hatches.Count > 0)
+            if (spawnHatches.Where(c => c.spawnedEggExists).Count() < maxEggsInScene)
             {
-                int index = Random.Range(0, hatches.Count);
-                if (hatches[index].containsEgg)
-                    hatches.RemoveAt(index);
-                else
+                List<HatchBehaviour> hatches = new List<HatchBehaviour>(spawnHatches);
+                while (hatches.Count > 0)
                 {
-                    hatches[index].SpawnEgg();
-                    break;
+                    int index = Random.Range(0, hatches.Count);
+                    if (hatches[index].containsEgg)
+                        hatches.RemoveAt(index);
+                    else
+                    {
+                        GameHandler.Instance.PlaySound("EggSpawn");
+                        hatches[index].SpawnEgg();
+                        break;
+                    }
                 }
             }
 

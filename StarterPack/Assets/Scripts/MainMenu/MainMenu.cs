@@ -8,8 +8,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private string currentLevel;
     private int currentLevelIndex = 0;
-
-    [SerializeField]
     private string[] levelNames;
 
     [SerializeField]
@@ -24,9 +22,11 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        levelNames = GameHandler.Instance.levelNames;
         currentLevel = levelNames[currentLevelIndex];
         ChangeButton(0);
         UpdateUI();
+        
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour
     {
         if(Input.anyKeyDown)
         {
-            canPlay = AllPlayersIn();
+            canPlay = EnoughPlayersIn();
             UpdateUI();
         }
 
@@ -77,10 +77,24 @@ public class MainMenu : MonoBehaviour
 
     }
 
+    void SetActivePlayers()
+    {
+        bool[] activePlayers = {false,false,false,false};
+        foreach(PlayerSelector player in GameObject.FindObjectsOfType<PlayerSelector>())
+        {
+            activePlayers[player.GetPlayerNumber() - 1] = player.IsJoined();
+        }
+
+        GameHandler.Instance.SetActivePlayers(activePlayers);
+    }
+
     void StartGame()
     {
+        SetActivePlayers();
         Debug.Log("Starting Game...");
+        GameHandler.Instance.lastLevelPlayed = currentLevel;
         SceneManager.LoadScene(currentLevel);
+        
     }
 
     void ChangeButton(int delta)
@@ -115,16 +129,16 @@ public class MainMenu : MonoBehaviour
         stageText.text = $"< {currentLevel.ToUpper()} >";
     }
 
-    bool AllPlayersIn()
+    bool EnoughPlayersIn()
     {
-        bool allIn = true;
+        int amountJoined = 0;
 
         foreach(PlayerSelector player in GameObject.FindObjectsOfType<PlayerSelector>())
         {
-            if(!player.IsJoined()) allIn = false;
+            if(player.IsJoined()) amountJoined++;
         }
 
-        return allIn;
+        return amountJoined >= 2;
     }
 
 }

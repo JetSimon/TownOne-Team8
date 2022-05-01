@@ -5,6 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ChickenController : MonoBehaviour
 {
+    //Publics
+    [Header("Player")]
+    public int playerNum = 1;
+    [SerializeField]
+    private float respawnTime = 1;
+
+    [Header("Speed Tuneables")]
     public int eggsSecured;
     public float speed;
     public float finalSpeed;
@@ -13,17 +20,18 @@ public class ChickenController : MonoBehaviour
     public float maxSpeed = 6.0f;
 
     public float eggHoldSpeedModifier = 0.9f;
-
     public float stunDuration = 2.00f;
-
+    
+    [Header("Raws")]
     public float HRaw;
     public float VRaw;
 
-    public int playerNum = 1;
+    //Privates
     private Vector3 startingPoint;
     private Vector3 initialScale;
     private bool canMove = true;
 
+    [Header("Inspects")]
     public GameObject carriedEgg;
     public bool stunned;
 
@@ -32,27 +40,54 @@ public class ChickenController : MonoBehaviour
 
     private Animator animator;
 
+    private AudioSource cluckSound;
+
+    [SerializeField]
+    private Sprite[] hats;
+
+    [SerializeField]
+    private SpriteRenderer hatRenderer;
+
     private void Start()
     {
         startingPoint = transform.position;
         initialScale = transform.localScale;
+        
     }
     private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        cluckSound = GetComponent<AudioSource>();
+
+        //hatRenderer.color = spriteRenderer.color;
+        hatRenderer.sprite = hats[Random.Range(0, hats.Length)];
 
         //Get Raws
         HRaw = 0;
         VRaw = 0;
     }
 
+    public Color GetPlayerColor()
+    {
+        return spriteRenderer.color;
+    }
 
 
+    private void Update()
+    {
+        if (GetComponentInChildren<EggBehaviour>() != null)
+            carriedEgg.transform.localPosition = new Vector3(0, 1.75f, 0);
+    }
 
     private void FixedUpdate()
     {
+        if(Input.GetButtonDown($"Fire P{playerNum}"))
+        {
+            GameHandler.Instance.PlaySoundWithRandomPitch("Cluck0" + Random.Range(1,8));
+        }
+
         if(HRaw != Input.GetAxisRaw($"Horizontal P{playerNum}") || VRaw != Input.GetAxisRaw($"Vertical P{playerNum}"))
         {
             //Set Last Raws
@@ -85,6 +120,11 @@ public class ChickenController : MonoBehaviour
 
         animator.SetBool("Walking", HRaw != 0);
 
+        if(HRaw != 0 || VRaw != 0)
+        {
+            //GameHandler.Instance.PlaySound("Walk");
+        }
+
 
         RigidbodyConstraints2D normalConstraints = RigidbodyConstraints2D.FreezeRotation;
         RigidbodyConstraints2D stunnedConstraints = normalConstraints | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
@@ -97,16 +137,23 @@ public class ChickenController : MonoBehaviour
         carriedEgg.GetComponent<EggBehaviour>().animator.SetTrigger("Deposited");
 
         Debug.Log("Deposited egg");
+        GameHandler.Instance.PlaySound("EggDeliver");
     }
 
     public void Die()
     {
-        if(eggsSecured > 0)
+        GameHandler.Instance.PlaySound("Death");
+
+        if(carriedEgg)
         {
-            eggsSecured = 0;
+            Destroy(carriedEgg);
         }
-        transform.position = startingPoint;
-        transform.localScale = initialScale;
+
+
+
+        StartCoroutine(Respawn());
+
+        
     }
 
     public void enableMove()
@@ -138,7 +185,15 @@ public class ChickenController : MonoBehaviour
     }
     public void Stun()
     {
+        GameHandler.Instance.PlaySoundWithRandomPitch("Cluck0" + Random.Range(1,8));
         StartCoroutine(StunnedCoroutine());
+    }
+
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(respawnTime);
+        transform.position = startingPoint;
+        transform.localScale = initialScale;
     }
 
     private IEnumerator StunnedCoroutine()

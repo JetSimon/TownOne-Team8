@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class ChickenPanelBehaviour : MonoBehaviour
 {
     public TextMeshProUGUI text_playerName;
     public TextMeshProUGUI text_eggsCount;
 
-    public ChickenController target;
+    public int targetPlayer;
 
     // Update is called once per frame
     void Update()
     {
-        if (target != null)
+        if (GameHandler.Instance.activePlayers[targetPlayer - 1])
         {
-            text_playerName.text = $"PLAYER {target.playerNum}";
-            text_eggsCount.text = $"{target.eggsSecured} EGGS";
-        }            
+            ChickenController target = GameHandler.Instance.chickenControllers.First(c => c.playerNum == targetPlayer);
+            if (target != null)
+            {
+                text_playerName.text = $"PLAYER {target.playerNum}";
+                text_eggsCount.text = $"{target.eggsSecured} EGGS";
+            }
+        }
+        else gameObject.SetActive(false);
     }
 }

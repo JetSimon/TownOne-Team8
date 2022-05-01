@@ -8,6 +8,7 @@ public class Grinder : MonoBehaviour
     bool grinding;
     [SerializeField] float shrinkRate = 0.95f;
     [SerializeField] Component activeSprite;
+    [SerializeField] ParticleSystem chickenDeathSystem;
 
     bool pendingDeath = false;
 
@@ -21,6 +22,11 @@ public class Grinder : MonoBehaviour
         if(activeSprite)
         {
             activeSprite.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+        }
+
+        if(chickenDeathSystem)
+        {
+            chickenDeathSystem.Stop();
         }
     }
 
@@ -56,9 +62,19 @@ public class Grinder : MonoBehaviour
 
                 if(!pendingDeath) 
                 {
+                    if(chickenDeathSystem && dyingPlayer)
+                    {
+
+                        ParticleSystem.MainModule settings = chickenDeathSystem.GetComponent<ParticleSystem>().main;
+                        settings.startColor = new ParticleSystem.MinMaxGradient(dyingPlayer.GetComponent<ChickenController>().GetPlayerColor());
+
+                        chickenDeathSystem.Play();
+                    }
+
                     pendingDeath = true;
                     overlaps.Remove(dyingPlayer);
-                    Invoke("killPlayer", 2f);
+                    GameHandler.Instance.PlaySound("Grinder");
+                    Invoke("killPlayer", 1f);
                 }
                 
             }
@@ -100,6 +116,7 @@ public class Grinder : MonoBehaviour
     {
         if(dyingPlayer)
         {
+            
             dyingPlayer.GetComponent<ChickenController>().Die();
             dyingPlayer.GetComponent<ChickenController>().enableMove();
             grinding = false;
@@ -114,6 +131,11 @@ public class Grinder : MonoBehaviour
         if(activeSprite)
         {
             activeSprite.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+        }
+
+        if(chickenDeathSystem)
+        {
+            chickenDeathSystem.Stop();
         }
     }
 
