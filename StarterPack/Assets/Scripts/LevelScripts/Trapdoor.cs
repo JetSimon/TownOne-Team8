@@ -8,12 +8,15 @@ public class Trapdoor : MonoBehaviour
     [SerializeField] float shrinkRate = 0.95f;
     [SerializeField] Component activeSprite;
 
+    [SerializeField] float deathWait = 2f;
+
     bool pendingDeath = false;
 
     private GameObject dyingPlayer; //= collider.GetComponent<ChickenController>().gameObject;
     [SerializeField] private bool disableCollision;
 
     public List<GameObject> overlaps;
+    public List<GameObject> pendingDead;
 
     private void Awake()
     {
@@ -57,28 +60,36 @@ public class Trapdoor : MonoBehaviour
         {
             if(!disableCollision)
             {
-                killPlayer();
+                if(overlap.GetComponent<ChickenController>())
+                {
+                    overlap.GetComponent<ChickenController>().disableMove();
+                    overlap.transform.position = this.transform.position;
+
+                    pendingDead.Add(overlap);
+
+                    overlaps.Remove(overlap);
+
+                    break;
+                }
             }
         }
 
+        foreach (GameObject dying in pendingDead)
         {
-            dyingPlayer.GetComponent<ChickenController>().disableMove();
 
-            if (dyingPlayer.transform.localScale.x > 0.1f)
+            if(dying.transform.localScale.x > 0.1f) 
             {
-                dyingPlayer.transform.localScale = dyingPlayer.transform.localScale * (Time.deltaTime * shrinkRate);
-            }
-            else
+                dying.transform.localScale = dying.transform.localScale * 0.95f;
+            } else
             {
-                dyingPlayer.transform.localScale = dyingPlayer.transform.localScale * 0;
+                dying.GetComponent<SpriteRenderer>().enabled = false;
+                StartCoroutine(killSpecificPlayer(dying, deathWait));
+                pendingDead.Remove(dying);
 
-                if (!pendingDeath)
-                {
-                    pendingDeath = true;
-                    overlaps.Remove(dyingPlayer);
-                }
-
+                break;
             }
+
+            
         }
 
     }
@@ -113,22 +124,20 @@ public class Trapdoor : MonoBehaviour
         }
     }
 
-    private void killPlayer()
+    IEnumerator killSpecificPlayer(GameObject player, float delayTime)
     {
-        if (dyingPlayer)
-        {
-            dyingPlayer.GetComponent<ChickenController>().Die();
-            dyingPlayer.GetComponent<ChickenController>().enableMove();
-            grinding = false;
-            pendingDeath = false;
+        yield return new WaitForSeconds(delayTime);
+        // Now do your thing here
 
-            dyingPlayer = null;
-        }
-        else
+        if (player)
         {
-            return;
+            player.GetComponent<SpriteRenderer>().enabled = true;
+
+            player.GetComponent<ChickenController>().Die();
+            player.GetComponent<ChickenController>().enableMove();
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
