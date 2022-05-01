@@ -74,7 +74,7 @@ public class Grinder : MonoBehaviour
                     pendingDeath = true;
                     overlaps.Remove(dyingPlayer);
                     GameHandler.Instance.PlaySound("Grinder");
-                    Invoke("killPlayer", 2f);
+                    Invoke("killPlayer", 1f);
                 }
                 
             }
@@ -118,7 +118,6 @@ public class Grinder : MonoBehaviour
         {
             
             dyingPlayer.GetComponent<ChickenController>().Die();
-            dyingPlayer.GetComponent<ChickenController>().enableMove();
             grinding = false;
             pendingDeath = false;
 
