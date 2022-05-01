@@ -21,7 +21,7 @@ public class ChickenController : MonoBehaviour
 
     public float eggHoldSpeedModifier = 0.9f;
     public float stunDuration = 2.00f;
-    
+
     [Header("Raws")]
     public float HRaw;
     public float VRaw;
@@ -41,6 +41,7 @@ public class ChickenController : MonoBehaviour
     private Animator animator;
 
     private AudioSource cluckSound;
+    private Color initialColor;
 
     [SerializeField]
     private Sprite[] hats;
@@ -52,7 +53,9 @@ public class ChickenController : MonoBehaviour
     {
         startingPoint = transform.position;
         initialScale = transform.localScale;
-        
+
+        initialColor = spriteRenderer.color;
+
     }
     private void Awake()
     {
@@ -71,7 +74,7 @@ public class ChickenController : MonoBehaviour
 
     public Color GetPlayerColor()
     {
-        return spriteRenderer.color;
+        return initialColor;
     }
 
 
@@ -99,7 +102,7 @@ public class ChickenController : MonoBehaviour
 
         //Calc Speed
         speed += (acceleration * Time.deltaTime);
-    
+
         //Clamp Speed
         Mathf.Clamp(speed, 0, (maxSpeed - baseSpeed));
 
@@ -153,7 +156,7 @@ public class ChickenController : MonoBehaviour
 
         StartCoroutine(Respawn());
 
-        
+
     }
 
     public void enableMove()
@@ -202,7 +205,6 @@ public class ChickenController : MonoBehaviour
         animator.SetTrigger("Hurt");
 
         stunned = true;
-        Color initialColor = spriteRenderer.color;
 
         float t = 0;
         while(t <= 1)
