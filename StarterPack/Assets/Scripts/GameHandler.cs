@@ -60,6 +60,7 @@ public class GameHandler : MonoBehaviour
     {
         int winnerNumber = 0;
         int winnerPoints = 0;
+        Color winnerColor = Color.white;
 
         foreach(ChickenController player in chickenControllers)
         {
@@ -67,15 +68,17 @@ public class GameHandler : MonoBehaviour
             {
                 winnerNumber = player.playerNum;
                 winnerPoints = player.eggsSecured;
+                winnerColor = player.GetPlayerColor();
             }
             else if(player.eggsSecured == winnerPoints)
             {
+                winnerColor = Color.white;
                 winnerNumber = -1;
                 break;
             }
         }
 
-        GameObject.Find("GameHUD").GetComponent<GameHud>().ShowWinner(winnerNumber);
+        GameObject.Find("GameHUD").GetComponent<GameHud>().ShowWinner(winnerNumber, winnerColor);
         
         
     }
