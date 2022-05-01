@@ -1,4 +1,4 @@
-# Nugget Madness
+![logo](https://i.imgur.com/ui5GOrO.png)
 ## by Team Nugget (AKA Team 8)
 
 A fun couch vs game where each player is trying to collect as many eggs as they can before the timer runs out. Avoid traps, knock eggs off your enemies' heads, and play in a variety of different stages. Snatch up as many yolks as you can or else they'll grow up to become chicken nuggets!
