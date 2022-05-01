@@ -6,11 +6,12 @@ public class Trapdoor : MonoBehaviour
 {
     bool grinding;
     [SerializeField] float shrinkRate = 0.95f;
-    [SerializeField] Component activeSprite;
 
     [SerializeField] float deathWait = 2f;
 
     bool pendingDeath = false;
+
+    public float interval = 2.0f;
 
     private GameObject dyingPlayer; //= collider.GetComponent<ChickenController>().gameObject;
     [SerializeField] private bool disableCollision;
@@ -18,36 +19,25 @@ public class Trapdoor : MonoBehaviour
     public List<GameObject> overlaps;
     public List<GameObject> pendingDead;
 
-    private void Awake()
-    {
-        
-    }
+    public Animator animator;
 
     private void Start()
     {
-        
-
-        Invoke("StartCycle", 2f);
+        StartCoroutine(Loop());
     }
-
-    private void StartCycle()
+    private IEnumerator Loop()
     {
-        if(activeSprite)
+        while (true)
         {
-            activeSprite.GetComponent<SpriteRenderer>().enabled = false;
-            disableCollision = false;
-        }
-        Invoke("CycleStep", 2f);
-    }
-
-    private void CycleStep()
-    {
-        if (activeSprite)
-        {
-            activeSprite.GetComponent<SpriteRenderer>().enabled = true;
+            animator.SetBool("Open", false);
+            yield return new WaitForSeconds(0.2f);
             disableCollision = true;
+            yield return new WaitForSeconds(interval);
+            animator.SetBool("Open", true);
+            yield return new WaitForSeconds(0.2f);
+            disableCollision = false;
+            yield return new WaitForSeconds(interval);
         }
-        Invoke("StartCycle", 2f);
     }
 
     // Update is called once per frame

@@ -1045,15 +1045,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3166194064305854652, guid: db7609b7b419bbb45936bff3842f73a5, type: 3}
       propertyPath: m_RootOrder
-      value: 48
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 3166194064305854652, guid: db7609b7b419bbb45936bff3842f73a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.25
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 3166194064305854652, guid: db7609b7b419bbb45936bff3842f73a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.517909
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3166194064305854652, guid: db7609b7b419bbb45936bff3842f73a5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1358,7 +1358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2420148512949465114, guid: 08fedad86fd36cd498483d098e0a0c1d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2460042982041835059, guid: 08fedad86fd36cd498483d098e0a0c1d, type: 3}
       propertyPath: m_Pivot.x
@@ -7807,6 +7807,7 @@ Transform:
   - {fileID: 141666875}
   - {fileID: 216671455}
   - {fileID: 704361388}
+  - {fileID: 1071588574}
   - {fileID: 287275029}
   - {fileID: 1781077695}
   - {fileID: 1835337223}
@@ -7815,14 +7816,13 @@ Transform:
   - {fileID: 174265269}
   - {fileID: 1157501979}
   - {fileID: 1658246602}
-  - {fileID: 1071588574}
+  - {fileID: 1843352205}
   - {fileID: 552040186}
-  - {fileID: 705672325}
   - {fileID: 607477308}
   - {fileID: 255461727}
   - {fileID: 1770394836}
   - {fileID: 835293115}
-  - {fileID: 1843352205}
+  - {fileID: 705672325}
   - {fileID: 1831926454}
   - {fileID: 22695783}
   - {fileID: 1971762971}
@@ -8664,7 +8664,7 @@ MonoBehaviour:
   - {fileID: 108224485}
   - {fileID: 263029224}
   - {fileID: 674403466}
-  additionalPadding: 0.2
+  additionalPadding: 2
   minSize: 6
 --- !u!114 &1498621613
 MonoBehaviour:
@@ -8678,6 +8678,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 1498621611}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!4 &1500453045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5775564620406418372, guid: 6ab5cfc89f66d3545964e112df293998, type: 3}
