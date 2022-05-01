@@ -23,6 +23,7 @@ public class EggBehaviour : MonoBehaviour
             pickedUp = true;
             boundChicken = collision.gameObject.GetComponent<ChickenController>();
             boundChicken.carriedEgg = gameObject;
+            GameHandler.Instance.PlaySound("EggSpawn");
             animator.SetTrigger("Collected");
         }
     }

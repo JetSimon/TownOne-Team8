@@ -5091,7 +5091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shrinkRate: 100
-  activeSprite: {fileID: 0}
+  activeSprite: {fileID: 7623928697515904007}
   chickenDeathSystem: {fileID: 498812039843694899}
   disableCollision: 0
   overlaps: []
