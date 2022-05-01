@@ -7806,30 +7806,30 @@ Transform:
   - {fileID: 607281235}
   - {fileID: 141666875}
   - {fileID: 216671455}
-  - {fileID: 1971762971}
-  - {fileID: 797215038}
-  - {fileID: 1781077695}
-  - {fileID: 419202616}
-  - {fileID: 174265269}
-  - {fileID: 1157501979}
-  - {fileID: 1071588574}
-  - {fileID: 552040186}
-  - {fileID: 1835337223}
-  - {fileID: 607477308}
-  - {fileID: 1658246602}
-  - {fileID: 1770394836}
-  - {fileID: 1722000073}
-  - {fileID: 705672325}
-  - {fileID: 1843352205}
-  - {fileID: 255461727}
-  - {fileID: 1831926454}
-  - {fileID: 22695783}
-  - {fileID: 835293115}
-  - {fileID: 1433246017}
   - {fileID: 704361388}
   - {fileID: 287275029}
+  - {fileID: 1781077695}
+  - {fileID: 1835337223}
+  - {fileID: 419202616}
+  - {fileID: 1722000073}
+  - {fileID: 174265269}
+  - {fileID: 1157501979}
+  - {fileID: 1658246602}
+  - {fileID: 1071588574}
+  - {fileID: 552040186}
+  - {fileID: 705672325}
+  - {fileID: 607477308}
+  - {fileID: 255461727}
+  - {fileID: 1770394836}
+  - {fileID: 835293115}
+  - {fileID: 1843352205}
+  - {fileID: 1831926454}
+  - {fileID: 22695783}
+  - {fileID: 1971762971}
   - {fileID: 1340688781}
+  - {fileID: 797215038}
   - {fileID: 2047726735}
+  - {fileID: 1433246017}
   - {fileID: 104223661}
   - {fileID: 1554351815}
   - {fileID: 560899652}
@@ -8664,7 +8664,7 @@ MonoBehaviour:
   - {fileID: 108224485}
   - {fileID: 263029224}
   - {fileID: 674403466}
-  additionalPadding: 0.2
+  additionalPadding: 2
   minSize: 6
 --- !u!114 &1498621613
 MonoBehaviour:
@@ -8678,6 +8678,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 0}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 0}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!4 &1500453045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5775564620406418372, guid: 6ab5cfc89f66d3545964e112df293998, type: 3}

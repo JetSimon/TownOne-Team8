@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3377681911090935656}
   - component: {fileID: 2118383077912913910}
-  - component: {fileID: 6395833411943453149}
   m_Layer: 0
   m_Name: Back
   m_TagString: Untagged
@@ -83,25 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6395833411943453149
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2502505653599272467}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 013e83d414c735f478bf08767b5dd3b9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7246308000004555309
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shrinkRate: 0.95
   deathWait: 1
+  interval: 2
   disableCollision: 0
   overlaps: []
   pendingDead: []
