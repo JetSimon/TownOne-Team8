@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/The Farm.unity
     guid: 109bdb19d9b408345a295921bcf401b4
+  - enabled: 1
+    path: Assets/Scenes/Death Zone.unity
+    guid: 57d81a387848d49bd9934a726620914b
   m_configObjects: {}

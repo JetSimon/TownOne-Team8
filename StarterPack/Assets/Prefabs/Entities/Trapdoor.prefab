@@ -241,7 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shrinkRate: 0.95
   activeSprite: {fileID: 2575154752160499175}
-  deathWait: 2
+  deathWait: 1
   disableCollision: 0
   overlaps: []
   pendingDead: []

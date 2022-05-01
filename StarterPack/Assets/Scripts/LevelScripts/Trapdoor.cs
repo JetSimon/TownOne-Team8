@@ -140,7 +140,7 @@ public class Trapdoor : MonoBehaviour
             player.GetComponent<SpriteRenderer>().enabled = true;
 
             player.GetComponent<ChickenController>().Die();
-            player.GetComponent<ChickenController>().enableMove();
+            
         }
     }
 

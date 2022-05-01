@@ -194,6 +194,7 @@ public class ChickenController : MonoBehaviour
         yield return new WaitForSeconds(respawnTime);
         transform.position = startingPoint;
         transform.localScale = initialScale;
+        enableMove();
     }
 
     private IEnumerator StunnedCoroutine()

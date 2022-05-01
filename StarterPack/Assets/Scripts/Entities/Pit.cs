@@ -25,7 +25,6 @@ public class Pit : MonoBehaviour
                 collider.transform.localScale = minSize;
                 collider.GetComponent<ChickenController>().Die();
                 shrink = false;
-                collider.GetComponent<ChickenController>().enableMove();
 
             }
         }
