@@ -42,10 +42,17 @@ public class ChickenController : MonoBehaviour
 
     private AudioSource cluckSound;
 
+    [SerializeField]
+    private Sprite[] hats;
+
+    [SerializeField]
+    private SpriteRenderer hatRenderer;
+
     private void Start()
     {
         startingPoint = transform.position;
         initialScale = transform.localScale;
+        
     }
     private void Awake()
     {
@@ -53,6 +60,9 @@ public class ChickenController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         cluckSound = GetComponent<AudioSource>();
+
+        //hatRenderer.color = spriteRenderer.color;
+        hatRenderer.sprite = hats[Random.Range(0, hats.Length)];
 
         //Get Raws
         HRaw = 0;
