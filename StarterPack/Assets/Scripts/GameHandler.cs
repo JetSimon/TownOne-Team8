@@ -15,6 +15,8 @@ public class GameHandler : MonoBehaviour
 
     private float eggSpawnElapsed = 0;
 
+    private bool[] activePlayers = {false, false, false, false};
+
     void Awake()
     {
         if(gameHandler != null)
@@ -47,6 +49,11 @@ public class GameHandler : MonoBehaviour
         {
             totalPoints[player.playerNum-1] += player.eggsSecured;
         }
+    }
+
+    public void SetActivePlayers(bool[] arr)
+    {
+        activePlayers = arr;
     }
 
     public void EndGame()

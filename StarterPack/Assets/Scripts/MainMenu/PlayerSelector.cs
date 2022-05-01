@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class PlayerSelector : MonoBehaviour
 {
     [SerializeField]
-    private string buttonToJoin, buttonToLeave, playerName, instructions, joinInstructions;
+    private int playerNumber;
+
+    [SerializeField]
+    private string buttonToJoin, buttonToLeave, instructions, joinInstructions;
 
     [SerializeField]
     private Color playerColor;
@@ -26,7 +29,7 @@ public class PlayerSelector : MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
-        playerNameText.text = playerName;
+        playerNameText.text = $"P{playerNumber}";
         instructionsText.text = instructions;
         joinButtonText.text = joinInstructions;
     }
@@ -71,5 +74,10 @@ public class PlayerSelector : MonoBehaviour
     public bool IsJoined()
     {
         return joined;
+    }
+
+    public int GetPlayerNumber()
+    {
+        return playerNumber;
     }
 }
