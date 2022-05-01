@@ -10,13 +10,14 @@ Player 4 uses gamepad 2
 
 ## Credits
 
-Level Design/Project Management - Jace Nielsen
-Programming/UI - Jet Simon
-Programming/Level Art - Evan Sarkozi
-Programming - Felipe Lara
-Programming - Richard Jiang
-Programming - Nghia "Mac" Vo
-Art - Ariane Shairp
-Music/SFX Sourcing/Editing - Alex Devitt
+* Level Design/Project Management - Jace Nielsen
+* Programming/UI - Jet Simon
+* Programming/Level Art - Evan Sarkozi
+* Programming - Felipe Lara
+* Programming - Richard Jiang
+* Programming - Nghia "Mac" Vo
+* Art - Ariane Shairp
+* Music/SFX Sourcing/Editing - Alex Devitt
+
 
 All SFX made by Team Nugget or sourced from freesound.org
