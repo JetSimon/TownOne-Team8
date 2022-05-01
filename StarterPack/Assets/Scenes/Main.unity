@@ -377,6 +377,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ab5cfc89f66d3545964e112df293998, type: 3}
+--- !u!1 &250464005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2378160134452107679, guid: 03f4819ad983549f39bced0d7ffb7a42, type: 3}
+  m_PrefabInstance: {fileID: 1334551075}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &250464008
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250464005}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: ad4677a880ce5c84f883c598dbacf744, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: ad4677a880ce5c84f883c598dbacf744, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!4 &263029224 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6608545639263159377, guid: 1ef92ea4d4ddefe418dc1743e8b1fdd1, type: 3}
@@ -4944,6 +4965,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1241472861}
     m_Modifications:
+    - target: {fileID: 119732945539881121, guid: 03f4819ad983549f39bced0d7ffb7a42, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 390770189922532087, guid: 03f4819ad983549f39bced0d7ffb7a42, type: 3}
       propertyPath: m_RootOrder
       value: 31
@@ -4988,14 +5013,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1554499518885842058, guid: 03f4819ad983549f39bced0d7ffb7a42, type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: 62737fb5c1d37f54ea66b352888c44a0, type: 2}
+    - target: {fileID: 1554499518885842058, guid: 03f4819ad983549f39bced0d7ffb7a42, type: 3}
+      propertyPath: m_Animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: 62737fb5c1d37f54ea66b352888c44a0, type: 2}
     - target: {fileID: 2009548221469593464, guid: 03f4819ad983549f39bced0d7ffb7a42, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.053
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 7207531483903903464, guid: 03f4819ad983549f39bced0d7ffb7a42, type: 3}
       propertyPath: m_Name
       value: Teleporter
       objectReference: {fileID: 0}
+    - target: {fileID: 9074833205184706872, guid: 03f4819ad983549f39bced0d7ffb7a42, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a0e6c3b86b5f2aa49aae0482b86f01ed, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03f4819ad983549f39bced0d7ffb7a42, type: 3}
 --- !u!4 &1334551076 stripped
