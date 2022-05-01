@@ -65,7 +65,7 @@ public class ChickenController : MonoBehaviour
         cluckSound = GetComponent<AudioSource>();
 
         //hatRenderer.color = spriteRenderer.color;
-        hatRenderer.sprite = hats[Random.Range(0, hats.Length)];
+        //hatRenderer.sprite = hats[Random.Range(0, hats.Length)];
 
         //Get Raws
         HRaw = 0;
