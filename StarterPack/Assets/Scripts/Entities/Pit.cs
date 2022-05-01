@@ -6,7 +6,7 @@ public class Pit : MonoBehaviour
 {
     bool shrink;
     GameObject collider;
-    Vector3 scalingFactor = new Vector3(-0.1f, -0.1f, 0);
+    Vector3 scalingFactor = new Vector3(-1f, -1f, 0);
     Vector3 minSize = new Vector3(0, 0, 0);
     // Start is called before the first frame update
     void Start()
@@ -19,13 +19,12 @@ public class Pit : MonoBehaviour
     {
         if (shrink == true && collider.transform.localScale.x > 0 && collider.transform.localScale.y > 0)
         {
-           collider.transform.localScale += scalingFactor;
+           collider.transform.localScale += scalingFactor * Time.deltaTime;
            if (collider.transform.localScale.x < 0 && collider.transform.localScale.y < 0)
             {
                 collider.transform.localScale = minSize;
                 collider.GetComponent<ChickenController>().Die();
                 shrink = false;
-                collider.GetComponent<ChickenController>().enableMove();
 
             }
         }

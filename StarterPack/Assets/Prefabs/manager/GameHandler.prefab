@@ -62,8 +62,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelNames:
-  - Main
+  - The Factory
+  - Death Zone
+  - The Farm
   eggSpawnInterval: 10
+  maxEggsInScene: 1
   chickenControllers: []
   spawnHatches: []
   eggChutes: []
