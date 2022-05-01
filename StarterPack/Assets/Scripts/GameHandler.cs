@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
+
+    [SerializeField]
+    public string[] levelNames;
     public static GameHandler Instance { get; private set; }
     public float eggSpawnInterval = 10;
 
@@ -17,6 +20,8 @@ public class GameHandler : MonoBehaviour
     private float eggSpawnElapsed = 0;
 
     public bool[] activePlayers = {false, false, false, false};
+
+    public string lastLevelPlayed = "";
 
     void Awake()
     {
@@ -67,21 +72,27 @@ public class GameHandler : MonoBehaviour
         int winnerNumber = 0;
         int winnerPoints = 0;
         Color winnerColor = Color.white;
+        bool tied = false;
 
         foreach(ChickenController player in chickenControllers)
         {
             if(player.eggsSecured > winnerPoints)
             {
+                tied = false;
                 winnerNumber = player.playerNum;
                 winnerPoints = player.eggsSecured;
                 winnerColor = player.GetPlayerColor();
             }
             else if(player.eggsSecured == winnerPoints)
             {
-                winnerColor = Color.white;
-                winnerNumber = -1;
-                break;
+                tied = true;
             }
+        }
+
+        if(tied)
+        {
+            winnerColor = Color.white;
+            winnerNumber = -1;
         }
 
         GameObject.Find("GameHUD").GetComponent<GameHud>().ShowWinner(winnerNumber, winnerColor);
