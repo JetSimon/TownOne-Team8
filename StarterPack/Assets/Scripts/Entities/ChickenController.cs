@@ -63,7 +63,11 @@ public class ChickenController : MonoBehaviour
     }
 
 
-
+    private void Update()
+    {
+        if (GetComponentInChildren<EggBehaviour>() != null)
+            carriedEgg.transform.localPosition = new Vector3(0, 1.75f, 0);
+    }
 
     private void FixedUpdate()
     {

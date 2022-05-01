@@ -10,7 +10,6 @@ public class EggBehaviour : MonoBehaviour
     public GameObject boundDepositChute;
 
     public bool pickedUp = false;
-
     private void Awake()
     {
         animator = GetComponent<Animator>();
