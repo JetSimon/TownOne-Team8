@@ -8,6 +8,8 @@ public class ChickenController : MonoBehaviour
     //Publics
     [Header("Player")]
     public int playerNum = 1;
+    [SerializeField]
+    private float respawnTime = 1;
 
     [Header("Speed Tuneables")]
     public int eggsSecured;
@@ -137,8 +139,11 @@ public class ChickenController : MonoBehaviour
             Destroy(carriedEgg);
         }
 
-        transform.position = startingPoint;
-        transform.localScale = initialScale;
+
+
+        StartCoroutine(Respawn());
+
+        
     }
 
     public void enableMove()
@@ -172,6 +177,13 @@ public class ChickenController : MonoBehaviour
     {
         GameHandler.Instance.PlaySoundWithRandomPitch("Cluck0" + Random.Range(1,8));
         StartCoroutine(StunnedCoroutine());
+    }
+
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(respawnTime);
+        transform.position = startingPoint;
+        transform.localScale = initialScale;
     }
 
     private IEnumerator StunnedCoroutine()
