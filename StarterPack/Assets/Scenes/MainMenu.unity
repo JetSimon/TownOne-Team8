@@ -1761,11 +1761,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
       propertyPath: playerColor.b
-      value: 0.007843137
+      value: 0.73280793
       objectReference: {fileID: 0}
     - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
       propertyPath: playerColor.g
-      value: 0.85606176
+      value: 0.007843137
       objectReference: {fileID: 0}
     - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
       propertyPath: playerColor.r
