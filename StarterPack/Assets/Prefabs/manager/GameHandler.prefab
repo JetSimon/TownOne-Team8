@@ -62,9 +62,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelNames:
-  - The Factory
+  - Grinder Alley
   - Death Zone
   - The Farm
+  - Pit Panic
   eggSpawnInterval: 10
   maxEggsInScene: 1
   chickenControllers: []
