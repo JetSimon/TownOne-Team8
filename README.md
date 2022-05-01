@@ -21,3 +21,5 @@ Player 4 uses gamepad 2
 
 
 All SFX made by Team Nugget or sourced from freesound.org
+
+[Play on itch.io!](https://simonjet.itch.io/nugget-madness)
