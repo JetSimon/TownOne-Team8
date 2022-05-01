@@ -9,6 +9,8 @@ public class Grinder : MonoBehaviour
     [SerializeField] float shrinkRate = 0.95f;
     [SerializeField] Component activeSprite;
     [SerializeField] ParticleSystem chickenDeathSystem;
+    Color playerColor;
+    [SerializeField] Material refMaterial;
 
     bool pendingDeath = false;
 
@@ -56,17 +58,25 @@ public class Grinder : MonoBehaviour
             if (dyingPlayer.transform.localScale.x > 0.1f)
             {
                 dyingPlayer.transform.localScale = dyingPlayer.transform.localScale * (Time.deltaTime * shrinkRate);
+
+                dyingPlayer.transform.localScale = new Vector3(Mathf.Clamp(dyingPlayer.transform.localScale.x, -0.5f, 0.5f), Mathf.Clamp(dyingPlayer.transform.localScale.y, -0.5f, 0.5f), dyingPlayer.transform.localScale.z);
             } else
             {
                 dyingPlayer.transform.localScale = dyingPlayer.transform.localScale * 0;
 
                 if(!pendingDeath) 
                 {
-                    if(chickenDeathSystem && dyingPlayer)
+                    if(chickenDeathSystem.GetComponent<ParticleSystem>() && dyingPlayer)
                     {
-
                         ParticleSystem.MainModule settings = chickenDeathSystem.GetComponent<ParticleSystem>().main;
+                        ParticleSystem particleSystemLocal = chickenDeathSystem.GetComponent<ParticleSystem>();
                         settings.startColor = new ParticleSystem.MinMaxGradient(dyingPlayer.GetComponent<ChickenController>().GetPlayerColor());
+
+                        //particleSystemLocal.GetComponent<Material>().color = dyingPlayer.GetComponent<ChickenController>().GetPlayerColor();
+
+                        //Color playerColor = dyingPlayer.GetComponent<ChickenController>().GetPlayerColor();
+
+                        particleSystemLocal.GetComponent<Renderer>().material.color = new Color(playerColor.r, playerColor.g, playerColor.b, 1.0f);
 
                         chickenDeathSystem.Play();
                     }
