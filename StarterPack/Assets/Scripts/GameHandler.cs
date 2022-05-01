@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
+
+    [SerializeField]
+    public string[] levelNames;
     public static GameHandler Instance { get; private set; }
     public float eggSpawnInterval = 10;
 
@@ -17,6 +20,8 @@ public class GameHandler : MonoBehaviour
     private float eggSpawnElapsed = 0;
 
     public bool[] activePlayers = {false, false, false, false};
+
+    public string lastLevelPlayed = "";
 
     void Awake()
     {
