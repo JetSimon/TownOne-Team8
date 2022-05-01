@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eggPrefab: {fileID: 6148792597052215413, guid: 097509e4b81c2468a8d8b072f4876e65, type: 3}
   spawnTime: 5
+  containsEgg: 0
   m_spawnAnimation: {fileID: 1490194547733980348}
 --- !u!111 &1490194547733980348
 Animation:
@@ -134,7 +135,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -4258533107543783845, guid: 2967baab41c95664cbac3057d8818aa5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
