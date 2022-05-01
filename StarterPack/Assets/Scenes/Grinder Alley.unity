@@ -7807,6 +7807,7 @@ Transform:
   - {fileID: 141666875}
   - {fileID: 216671455}
   - {fileID: 704361388}
+  - {fileID: 1071588574}
   - {fileID: 287275029}
   - {fileID: 1781077695}
   - {fileID: 1835337223}
@@ -7815,14 +7816,13 @@ Transform:
   - {fileID: 174265269}
   - {fileID: 1157501979}
   - {fileID: 1658246602}
-  - {fileID: 1071588574}
+  - {fileID: 1843352205}
   - {fileID: 552040186}
-  - {fileID: 705672325}
   - {fileID: 607477308}
   - {fileID: 255461727}
   - {fileID: 1770394836}
   - {fileID: 835293115}
-  - {fileID: 1843352205}
+  - {fileID: 705672325}
   - {fileID: 1831926454}
   - {fileID: 22695783}
   - {fileID: 1971762971}
@@ -8678,7 +8678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 0}
+  volumeTrigger: {fileID: 1498621611}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -8719,7 +8719,7 @@ MonoBehaviour:
       motionGridSize: 64
       colorBlindnessType: 0
       colorBlindnessStrength: 1
-  m_Resources: {fileID: 0}
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
   m_ShowToolkit: 0
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
