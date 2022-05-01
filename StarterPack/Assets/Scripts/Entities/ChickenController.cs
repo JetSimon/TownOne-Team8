@@ -57,6 +57,11 @@ public class ChickenController : MonoBehaviour
         VRaw = 0;
     }
 
+    public Color GetPlayerColor()
+    {
+        return spriteRenderer.color;
+    }
+
 
 
 
