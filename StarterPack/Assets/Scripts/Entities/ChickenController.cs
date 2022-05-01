@@ -5,6 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ChickenController : MonoBehaviour
 {
+    //Publics
+    [Header("Player")]
+    public int playerNum = 1;
+
+    [Header("Speed Tuneables")]
     public int eggsSecured;
     public float speed;
     public float finalSpeed;
@@ -13,17 +18,18 @@ public class ChickenController : MonoBehaviour
     public float maxSpeed = 6.0f;
 
     public float eggHoldSpeedModifier = 0.9f;
-
     public float stunDuration = 2.00f;
-
+    
+    [Header("Raws")]
     public float HRaw;
     public float VRaw;
 
-    public int playerNum = 1;
+    //Privates
     private Vector3 startingPoint;
     private Vector3 initialScale;
     private bool canMove = true;
 
+    [Header("Inspects")]
     public GameObject carriedEgg;
     public bool stunned;
 
