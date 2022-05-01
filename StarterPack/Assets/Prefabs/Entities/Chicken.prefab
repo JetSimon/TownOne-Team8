@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f6b476f97a6bc4e9d7263f8129dc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNum: 1
   eggsSecured: 0
   speed: 0
   finalSpeed: 0
@@ -129,7 +130,6 @@ MonoBehaviour:
   stunDuration: 2
   HRaw: 0
   VRaw: 0
-  playerNum: 1
   carriedEgg: {fileID: 0}
   stunned: 0
 --- !u!58 &5433094769072823219
@@ -147,7 +147,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
 --- !u!95 &7724302618939092389
 Animator:
   serializedVersion: 3
