@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
-    public static GameHandler gameHandler;
+    public static GameHandler Instance { get; private set; }
     public float eggSpawnInterval = 10;
 
     private int[] totalPoints = {0,0};
 
-    private ChickenController[] chickenControllers;
-    private HatchBehaviour[] spawnHatches;
-    private EggChuteBehaviour[] eggChutes;
+    public ChickenController[] chickenControllers;
+    public HatchBehaviour[] spawnHatches;
+    public EggChuteBehaviour[] eggChutes;
 
     private float eggSpawnElapsed = 0;
 
@@ -20,7 +20,7 @@ public class GameHandler : MonoBehaviour
 
     void Awake()
     {
-        if(gameHandler != null)
+        if(Instance != null)
         {
             Destroy(gameObject);
             return;
@@ -28,7 +28,7 @@ public class GameHandler : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        gameHandler = this;
+        Instance = this;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
