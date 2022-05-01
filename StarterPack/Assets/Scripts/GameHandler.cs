@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameHandler : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameHandler : MonoBehaviour
     public string[] levelNames;
     public static GameHandler Instance { get; private set; }
     public float eggSpawnInterval = 10;
+    public int maxEggsInScene = 1;
 
     private int[] totalPoints = {0,0};
 
@@ -159,17 +161,20 @@ public class GameHandler : MonoBehaviour
         if(eggSpawnElapsed >= eggSpawnInterval)
         {
             //Try to spawn an egg at a hatch
-            List<HatchBehaviour> hatches = new List<HatchBehaviour>(spawnHatches);
-            while(hatches.Count > 0)
+            if (spawnHatches.Where(c => c.spawnedEggExists).Count() < maxEggsInScene)
             {
-                int index = Random.Range(0, hatches.Count);
-                if (hatches[index].containsEgg)
-                    hatches.RemoveAt(index);
-                else
+                List<HatchBehaviour> hatches = new List<HatchBehaviour>(spawnHatches);
+                while (hatches.Count > 0)
                 {
-                    GameHandler.Instance.PlaySound("EggSpawn");
-                    hatches[index].SpawnEgg();
-                    break;
+                    int index = Random.Range(0, hatches.Count);
+                    if (hatches[index].containsEgg)
+                        hatches.RemoveAt(index);
+                    else
+                    {
+                        GameHandler.Instance.PlaySound("EggSpawn");
+                        hatches[index].SpawnEgg();
+                        break;
+                    }
                 }
             }
 

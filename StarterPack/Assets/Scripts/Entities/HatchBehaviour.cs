@@ -8,6 +8,7 @@ public class HatchBehaviour : MonoBehaviour
     public float spawnTime = 5.0f;
 
     public bool containsEgg = false;
+    public bool spawnedEggExists = false;
 
     public Animation m_spawnAnimation;
 
@@ -21,5 +22,6 @@ public class HatchBehaviour : MonoBehaviour
         prefab.GetComponent<EggBehaviour>().boundSourceHatch = gameObject;
         prefab.transform.position = transform.position + Vector3.up * 0.25f;
         containsEgg = true;
+        spawnedEggExists = true;
     }
 }
