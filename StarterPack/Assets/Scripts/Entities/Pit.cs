@@ -4,39 +4,37 @@ using UnityEngine;
 
 public class Pit : MonoBehaviour
 {
-    bool shrink;
-    GameObject collider;
-    Vector3 scalingFactor = new Vector3(-1f, -1f, 0);
-    Vector3 minSize = new Vector3(0, 0, 0);
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
+    GameObject dyingPlayer;
 
-    // Update is called once per frame
-    void Update()
+    private void KillPlayer(ChickenController controller)
     {
-        if (shrink == true && collider.transform.localScale.x > 0 && collider.transform.localScale.y > 0)
+        StartCoroutine(_KillLoop(controller));
+    }
+    private IEnumerator _KillLoop(ChickenController controller)
+    {
+        dyingPlayer = controller.gameObject;
+        dyingPlayer.GetComponent<ChickenController>().disableMove();
+
+        Vector3 initialScale = dyingPlayer.transform.localScale;
+        Vector3 initialPosition = dyingPlayer.transform.position;
+
+        float t = 0;
+        while (t <= 1)
         {
-           collider.transform.localScale += scalingFactor * Time.deltaTime;
-           if (collider.transform.localScale.x < 0 && collider.transform.localScale.y < 0)
-            {
-                collider.transform.localScale = minSize;
-                collider.GetComponent<ChickenController>().Die();
-                shrink = false;
-
-            }
+            dyingPlayer.transform.localScale = initialScale * Mathf.Lerp(1, 0, Mathf.Pow(t, 0.5f));
+            dyingPlayer.transform.position = Vector3.Lerp(initialPosition, transform.position, Mathf.Pow(t, 0.33f));
+            t += Time.deltaTime / 0.5f;
+            yield return null;
         }
-
+        dyingPlayer.GetComponent<ChickenController>().Die();
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collider = collision.gameObject;
-        collider.transform.position = transform.position;
-        collider.GetComponent<ChickenController>().disableMove();
-        shrink = true;
+        var chicken = collision.gameObject.GetComponent<ChickenController>();
+        if (chicken != null)
+            KillPlayer(chicken);
         GameHandler.Instance.PlaySound("Pit");
     }
 }
