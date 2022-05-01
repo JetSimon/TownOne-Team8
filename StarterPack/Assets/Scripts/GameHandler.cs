@@ -155,6 +155,11 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown("m"))
+        {
+            AudioListener.volume = AudioListener.volume == 0 ? 1f : 0;
+        }
+
         eggSpawnElapsed += Time.deltaTime;
         if(eggSpawnElapsed >= eggSpawnInterval)
         {
