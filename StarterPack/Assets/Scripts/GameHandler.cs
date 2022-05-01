@@ -46,7 +46,7 @@ public class GameHandler : MonoBehaviour
         audioManagerTransform = GameObject.Find("AudioManager").transform;
         if(audioManagerTransform)
         {
-            PlaySound("Music0" + Random.Range(1,4));
+            PlaySound("Music0" + Random.Range(1,6));
         }
     }
 
@@ -71,9 +71,12 @@ public class GameHandler : MonoBehaviour
 
     public void StopAllSounds()
     {
-        foreach(Transform t in audioManagerTransform)
+        if (audioManagerTransform != null)
         {
-            t.GetComponent<AudioSource>().Stop();
+            foreach (Transform t in audioManagerTransform)
+            {
+                t.GetComponent<AudioSource>().Stop();
+            }
         }
     }
 

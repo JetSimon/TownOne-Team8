@@ -128,7 +128,6 @@ public class Grinder : MonoBehaviour
         {
             
             dyingPlayer.GetComponent<ChickenController>().Die();
-            dyingPlayer.GetComponent<ChickenController>().enableMove();
             grinding = false;
             pendingDeath = false;
 
