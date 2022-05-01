@@ -171,7 +171,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4}
+  m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
 --- !u!114 &2512024523402752242
 MonoBehaviour:
@@ -189,8 +189,6 @@ MonoBehaviour:
   deathWait: 1
   interval: 2
   disableCollision: 0
-  overlaps: []
-  pendingDead: []
   animator: {fileID: 1713858390486691762}
 --- !u!1 &9014209646359949731
 GameObject:

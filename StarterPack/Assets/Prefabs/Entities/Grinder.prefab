@@ -5118,9 +5118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1437502467b98f4789ec2fdaed36e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shrinkRate: 100
-  activeSprite: {fileID: 7623928697515904007}
+  activeSprite: {fileID: 5540570188298429989}
   chickenDeathSystem: {fileID: 498812039843694899}
+  refMaterial: {fileID: 0}
   disableCollision: 0
   overlaps: []
 --- !u!61 &7615272243399081395

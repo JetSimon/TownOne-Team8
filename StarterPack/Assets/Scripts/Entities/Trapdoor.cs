@@ -2,9 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pit : MonoBehaviour
+public class Trapdoor : MonoBehaviour
 {
-    GameObject dyingPlayer;
+    bool grinding;
+    [SerializeField] float shrinkRate = 0.95f;
+
+    [SerializeField] float deathWait = 2f;
+
+    bool pendingDeath = false;
+
+    public float interval = 2.0f;
+
+    private GameObject dyingPlayer; //= collider.GetComponent<ChickenController>().gameObject;
+    [SerializeField] private bool disableCollision;
+
+    public Animator animator;
+
+    private void Start()
+    {
+        StartCoroutine(Loop());
+    }
+    private IEnumerator Loop()
+    {
+        while (true)
+        {
+            animator.SetBool("Open", false);
+            yield return new WaitForSeconds(0.2f);
+            disableCollision = true;
+            yield return new WaitForSeconds(interval);
+            animator.SetBool("Open", true);
+            yield return new WaitForSeconds(0.2f);
+            disableCollision = false;
+            yield return new WaitForSeconds(interval);
+        }
+    }
 
     private void KillPlayer(ChickenController controller)
     {
@@ -33,8 +64,7 @@ public class Pit : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var chicken = collision.gameObject.GetComponent<ChickenController>();
-        if (chicken != null)
+        if (chicken != null && !disableCollision)
             KillPlayer(chicken);
-        GameHandler.Instance.PlaySound("Pit");
     }
 }

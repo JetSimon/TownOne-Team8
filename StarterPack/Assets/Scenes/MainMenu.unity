@@ -131,8 +131,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4136774543210479332, guid: b718ee17a1ead46dca48ec08a7b4c2d3, type: 3}
+      propertyPath: levelNames.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136774543210479332, guid: b718ee17a1ead46dca48ec08a7b4c2d3, type: 3}
       propertyPath: levelNames.Array.data[0]
       value: Grinder Alley
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136774543210479332, guid: b718ee17a1ead46dca48ec08a7b4c2d3, type: 3}
+      propertyPath: levelNames.Array.data[3]
+      value: Pit Panic
       objectReference: {fileID: 0}
     - target: {fileID: 4136774543210479337, guid: b718ee17a1ead46dca48ec08a7b4c2d3, type: 3}
       propertyPath: m_Name
@@ -1753,11 +1761,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
       propertyPath: playerColor.b
-      value: 0.007843137
+      value: 0.73280793
       objectReference: {fileID: 0}
     - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
       propertyPath: playerColor.g
-      value: 0.85606176
+      value: 0.007843137
       objectReference: {fileID: 0}
     - target: {fileID: 2106125332600665349, guid: 001eac10c61794fadb27b95473e6fb32, type: 3}
       propertyPath: playerColor.r
