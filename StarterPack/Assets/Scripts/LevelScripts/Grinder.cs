@@ -115,6 +115,7 @@ public class Grinder : MonoBehaviour
     {
         if(dyingPlayer)
         {
+            GameHandler.Instance.PlaySound("Grinder");
             dyingPlayer.GetComponent<ChickenController>().Die();
             dyingPlayer.GetComponent<ChickenController>().enableMove();
             grinding = false;
