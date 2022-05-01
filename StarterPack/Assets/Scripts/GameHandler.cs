@@ -43,8 +43,14 @@ public class GameHandler : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadEntities();
-        audioManagerTransform = GameObject.Find("AudioManager").transform;
-        if(audioManagerTransform)
+        GameObject audioManagerObject = GameObject.Find("AudioManager");
+
+        if(audioManagerObject != null)
+            audioManagerTransform = audioManagerObject.transform;
+        else
+            audioManagerTransform = null;
+
+        if(audioManagerTransform != null)
         {
             PlaySound("Music0" + Random.Range(1,6));
         }
@@ -163,6 +169,11 @@ public class GameHandler : MonoBehaviour
         if(Input.GetKeyDown("m"))
         {
             AudioListener.volume = AudioListener.volume == 0 ? 1f : 0;
+        }
+
+        if(Input.GetKeyDown("escape"))
+        {
+            SceneManager.LoadScene("MainMenu");
         }
 
         eggSpawnElapsed += Time.deltaTime;
