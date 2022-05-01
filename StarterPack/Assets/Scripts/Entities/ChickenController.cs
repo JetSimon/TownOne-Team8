@@ -126,6 +126,11 @@ public class ChickenController : MonoBehaviour
         {
             eggsSecured = 0;
         }
+        if(carriedEgg)
+        {
+            Destroy(carriedEgg);
+        }
+
         transform.position = startingPoint;
         transform.localScale = initialScale;
     }
