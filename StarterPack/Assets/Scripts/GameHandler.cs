@@ -51,8 +51,26 @@ public class GameHandler : MonoBehaviour
 
     public void EndGame()
     {
-        Debug.Log("<color=red>GAME OVER SCREEN NOT IN GAME YET, GOING BACK TO MAINMENU</color>");
-        SceneManager.LoadScene("MainMenu");
+        int winnerNumber = 0;
+        int winnerPoints = 0;
+
+        foreach(ChickenController player in chickenControllers)
+        {
+            if(player.eggsSecured > winnerPoints)
+            {
+                winnerNumber = player.playerNum;
+                winnerPoints = player.eggsSecured;
+            }
+            else if(player.eggsSecured == winnerPoints)
+            {
+                winnerNumber = -1;
+                break;
+            }
+        }
+
+        GameObject.Find("GameHUD").GetComponent<GameHud>().ShowWinner(winnerNumber);
+        
+        
     }
     void Start()
     {
