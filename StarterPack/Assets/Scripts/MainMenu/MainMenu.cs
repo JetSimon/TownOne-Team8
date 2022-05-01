@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour
     {
         if(Input.anyKeyDown)
         {
-            canPlay = AllPlayersIn();
+            canPlay = EnoughPlayersIn();
             UpdateUI();
         }
 
@@ -77,8 +77,22 @@ public class MainMenu : MonoBehaviour
 
     }
 
+    void SetActivePlayers()
+    {
+        int i = 0;
+        bool[] activePlayers = {false,false,false,false};
+        foreach(PlayerSelector player in GameObject.FindObjectsOfType<PlayerSelector>())
+        {
+            activePlayers[i] = player.IsJoined();
+            i++;
+        }
+
+        GameHandler.gameHandler.SetActivePlayers(activePlayers);
+    }
+
     void StartGame()
     {
+        SetActivePlayers();
         Debug.Log("Starting Game...");
         SceneManager.LoadScene(currentLevel);
     }
@@ -115,16 +129,16 @@ public class MainMenu : MonoBehaviour
         stageText.text = $"< {currentLevel.ToUpper()} >";
     }
 
-    bool AllPlayersIn()
+    bool EnoughPlayersIn()
     {
-        bool allIn = true;
+        int amountJoined = 0;
 
         foreach(PlayerSelector player in GameObject.FindObjectsOfType<PlayerSelector>())
         {
-            if(!player.IsJoined()) allIn = false;
+            if(player.IsJoined()) amountJoined++;
         }
 
-        return allIn;
+        return amountJoined >= 2;
     }
 
 }
