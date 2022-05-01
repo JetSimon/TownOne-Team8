@@ -74,8 +74,16 @@ public class ChickenController : MonoBehaviour
         if(Input.GetButtonDown($"Fire P{playerNum}"))
         {
             print("TRYING TO CLUCK");
-            cluckSound.pitch = Random.Range(0.85f, 1.2f);
-            cluckSound.Play();
+            if(Random.Range(0,100) < 10)
+            {
+                cluckSound.pitch = Random.Range(0.85f, 1.2f);
+                cluckSound.Play();
+            }
+            else
+            {
+                GameHandler.Instance.PlaySoundWithRandomPitch("Cluck01");
+            }
+            
         }
 
         if(HRaw != Input.GetAxisRaw($"Horizontal P{playerNum}") || VRaw != Input.GetAxisRaw($"Vertical P{playerNum}"))
@@ -110,6 +118,11 @@ public class ChickenController : MonoBehaviour
 
         animator.SetBool("Walking", HRaw != 0);
 
+        if(HRaw != 0 || VRaw != 0)
+        {
+            //GameHandler.Instance.PlaySound("Walk");
+        }
+
 
         RigidbodyConstraints2D normalConstraints = RigidbodyConstraints2D.FreezeRotation;
         RigidbodyConstraints2D stunnedConstraints = normalConstraints | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
@@ -122,10 +135,13 @@ public class ChickenController : MonoBehaviour
         carriedEgg.GetComponent<EggBehaviour>().animator.SetTrigger("Deposited");
 
         Debug.Log("Deposited egg");
+        GameHandler.Instance.PlaySound("EggDeliver");
     }
 
     public void Die()
     {
+        GameHandler.Instance.PlaySound("Death");
+
         if(carriedEgg)
         {
             Destroy(carriedEgg);
@@ -164,6 +180,7 @@ public class ChickenController : MonoBehaviour
     }
     public void Stun()
     {
+        GameHandler.Instance.PlaySoundWithRandomPitch("Cluck01");
         StartCoroutine(StunnedCoroutine());
     }
 
