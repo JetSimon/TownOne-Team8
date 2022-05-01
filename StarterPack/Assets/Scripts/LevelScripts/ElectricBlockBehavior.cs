@@ -8,9 +8,9 @@ public class ElectricBlockBehavior : MonoBehaviour
     private GameObject sprite;
     private SpriteRenderer spriteRenderer;
 
-    public int safeTime = 4;
-    public int dangerTime = 4;
-    public float countDownOffset = 0;
+    public float timeInBetweenElectricity = 4;
+    public float ElectricityTimeInterval = 0.25f;
+    public float timeOffset = 0;
     private bool isSafe = true;
     private float currentTime;
 
@@ -24,7 +24,7 @@ public class ElectricBlockBehavior : MonoBehaviour
         // get the sprite and current time
         sprite = gameObject.transform.GetChild(0).gameObject;
         spriteRenderer = sprite.GetComponent<SpriteRenderer>();
-        currentTime = safeTime;
+        currentTime = timeInBetweenElectricity - timeOffset;
 
         // get the safe and dangerous color, set the sprite to be safecolor
         dangerColor = Color.red;
@@ -41,12 +41,12 @@ public class ElectricBlockBehavior : MonoBehaviour
             if (isSafe)
             {
                 spriteRenderer.color = dangerColor;
-                currentTime = dangerTime;
+                currentTime = ElectricityTimeInterval;
             }
             else
             {
                 spriteRenderer.color = safeColor;
-                currentTime = safeTime;
+                currentTime = timeInBetweenElectricity;
             }
             isSafe = !isSafe;
         }

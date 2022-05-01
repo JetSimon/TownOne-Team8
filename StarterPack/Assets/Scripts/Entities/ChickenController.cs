@@ -39,11 +39,13 @@ public class ChickenController : MonoBehaviour
     private Animator animator;
 
     private AudioSource cluckSound;
+    private Color initialColor;
 
     private void Start()
     {
         startingPoint = transform.position;
         initialScale = transform.localScale;
+        initialColor = spriteRenderer.color;
     }
     private void Awake()
     {
@@ -59,7 +61,7 @@ public class ChickenController : MonoBehaviour
 
     public Color GetPlayerColor()
     {
-        return spriteRenderer.color;
+        return initialColor;
     }
 
 
@@ -179,7 +181,6 @@ public class ChickenController : MonoBehaviour
         animator.SetTrigger("Hurt");
 
         stunned = true;
-        Color initialColor = spriteRenderer.color;
 
         float t = 0;
         while(t <= 1)
