@@ -29,7 +29,7 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            GameHandler.gameHandler.EndGame();
+            GameHandler.Instance.EndGame();
             Destroy(this);
         }
     }

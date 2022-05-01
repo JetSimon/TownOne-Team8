@@ -85,7 +85,7 @@ public class MainMenu : MonoBehaviour
             activePlayers[player.GetPlayerNumber() - 1] = player.IsJoined();
         }
 
-        GameHandler.gameHandler.SetActivePlayers(activePlayers);
+        GameHandler.Instance.SetActivePlayers(activePlayers);
     }
 
     void StartGame()

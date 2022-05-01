@@ -122,10 +122,6 @@ public class ChickenController : MonoBehaviour
 
     public void Die()
     {
-        if(eggsSecured > 0)
-        {
-            eggsSecured = 0;
-        }
         if(carriedEgg)
         {
             Destroy(carriedEgg);

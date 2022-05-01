@@ -5,21 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
-    public static GameHandler gameHandler;
+    public static GameHandler Instance { get; private set; }
     public float eggSpawnInterval = 10;
 
     private int[] totalPoints = {0,0};
 
-    private ChickenController[] chickenControllers;
-    private HatchBehaviour[] spawnHatches;
+    public ChickenController[] chickenControllers;
+    public HatchBehaviour[] spawnHatches;
+    public EggChuteBehaviour[] eggChutes;
 
     private float eggSpawnElapsed = 0;
 
-    private bool[] activePlayers = {false, false, false, false};
+    public bool[] activePlayers = {false, false, false, false};
 
     void Awake()
     {
-        if(gameHandler != null)
+        if(Instance != null)
         {
             Destroy(gameObject);
             return;
@@ -27,7 +28,7 @@ public class GameHandler : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        gameHandler = this;
+        Instance = this;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -38,11 +39,14 @@ public class GameHandler : MonoBehaviour
     void LoadEntities()
     {
         chickenControllers = FindObjectsOfType<ChickenController>();
-        Debug.Log($"There are {chickenControllers.Length} chickens in the match");
-
         spawnHatches = FindObjectsOfType<HatchBehaviour>();
-        Debug.Log($"There are {spawnHatches.Length} egg spawn hatches in the match");
+        eggChutes = FindObjectsOfType<EggChuteBehaviour>();
 
+        foreach (var controller in chickenControllers)
+            controller.gameObject.SetActive(activePlayers[controller.playerNum - 1]);
+
+        foreach (var chute in eggChutes)
+            chute.gameObject.SetActive(activePlayers[chute.requiredPlayerNum - 1]);
     }
 
     void AddUpPoints()
