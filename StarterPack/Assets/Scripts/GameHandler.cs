@@ -21,9 +21,11 @@ public class GameHandler : MonoBehaviour
     {
         if(gameHandler != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
+
+        DontDestroyOnLoad(gameObject);
 
         gameHandler = this;
     }
