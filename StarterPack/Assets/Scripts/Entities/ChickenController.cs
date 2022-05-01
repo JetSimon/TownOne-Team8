@@ -74,11 +74,11 @@ public class ChickenController : MonoBehaviour
             cluckSound.Play();
         }
 
-        if(HRaw != Input.GetAxis($"Horizontal P{playerNum}") || VRaw != Input.GetAxis($"Vertical P{playerNum}"))
+        if(HRaw != Input.GetAxisRaw($"Horizontal P{playerNum}") || VRaw != Input.GetAxisRaw($"Vertical P{playerNum}"))
         {
             //Set Last Raws
-            HRaw = Input.GetAxis($"Horizontal P{playerNum}");
-            VRaw = Input.GetAxis($"Vertical P{playerNum}");
+            HRaw = Input.GetAxisRaw($"Horizontal P{playerNum}");
+            VRaw = Input.GetAxisRaw($"Vertical P{playerNum}");
 
             speed = 0;
         }
@@ -96,7 +96,7 @@ public class ChickenController : MonoBehaviour
 
         if (canMove && !stunned)
         {
-            Vector2 move = new Vector2(Input.GetAxis($"Horizontal P{playerNum}"), Input.GetAxis($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * finalSpeed;
+            Vector2 move = new Vector2(Input.GetAxisRaw($"Horizontal P{playerNum}"), Input.GetAxisRaw($"Vertical P{playerNum}")).normalized * Time.fixedDeltaTime * finalSpeed;
             m_rigidbody.MovePosition(m_rigidbody.position + move);
 
         }

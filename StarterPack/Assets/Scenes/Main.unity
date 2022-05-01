@@ -4068,6 +4068,14 @@ PrefabInstance:
       propertyPath: eggSpawnInterval
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4136774543210479332, guid: b718ee17a1ead46dca48ec08a7b4c2d3, type: 3}
+      propertyPath: activePlayers.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136774543210479332, guid: b718ee17a1ead46dca48ec08a7b4c2d3, type: 3}
+      propertyPath: activePlayers.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4136774543210479337, guid: b718ee17a1ead46dca48ec08a7b4c2d3, type: 3}
       propertyPath: m_Name
       value: GameHandler
