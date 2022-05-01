@@ -79,12 +79,10 @@ public class MainMenu : MonoBehaviour
 
     void SetActivePlayers()
     {
-        int i = 0;
         bool[] activePlayers = {false,false,false,false};
         foreach(PlayerSelector player in GameObject.FindObjectsOfType<PlayerSelector>())
         {
-            activePlayers[i] = player.IsJoined();
-            i++;
+            activePlayers[player.GetPlayerNumber() - 1] = player.IsJoined();
         }
 
         GameHandler.gameHandler.SetActivePlayers(activePlayers);
