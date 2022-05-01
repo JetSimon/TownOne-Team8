@@ -12,7 +12,7 @@ Player 4 uses gamepad 2
 
 * Level Design/Project Management - Jace Nielsen
 * Programming/UI - Jet Simon
-* Programming/Level Art - Evan Sarkozi
+* Programming/Level Art/UI - Evan Sarkozi
 * Programming - Felipe Lara
 * Programming - Richard Jiang
 * Programming - Nghia "Mac" Vo
