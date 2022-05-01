@@ -42,6 +42,10 @@ public class GameHandler : MonoBehaviour
     {
         LoadEntities();
         audioManagerTransform = GameObject.Find("AudioManager").transform;
+        if(audioManagerTransform)
+        {
+            PlaySound("Music0" + Random.Range(0,4));
+        }
     }
 
     public void PlaySound(string s)
@@ -61,6 +65,14 @@ public class GameHandler : MonoBehaviour
     {
         if(audioManagerTransform == null) return;
         audioManagerTransform.Find(s).GetComponent<AudioSource>().Stop();
+    }
+
+    public void StopAllSounds()
+    {
+        foreach(Transform t in audioManagerTransform)
+        {
+            t.GetComponent<AudioSource>().Stop();
+        }
     }
 
     void LoadEntities()
@@ -91,6 +103,8 @@ public class GameHandler : MonoBehaviour
 
     public void EndGame()
     {
+        StopAllSounds();
+        GameHandler.Instance.PlaySound("LevelComplete");
         int winnerNumber = 0;
         int winnerPoints = 0;
         Color winnerColor = Color.white;
@@ -153,6 +167,7 @@ public class GameHandler : MonoBehaviour
                     hatches.RemoveAt(index);
                 else
                 {
+                    GameHandler.Instance.PlaySound("EggSpawn");
                     hatches[index].SpawnEgg();
                     break;
                 }
