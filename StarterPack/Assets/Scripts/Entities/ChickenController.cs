@@ -73,17 +73,7 @@ public class ChickenController : MonoBehaviour
     {
         if(Input.GetButtonDown($"Fire P{playerNum}"))
         {
-            print("TRYING TO CLUCK");
-            if(Random.Range(0,100) < 10)
-            {
-                cluckSound.pitch = Random.Range(0.85f, 1.2f);
-                cluckSound.Play();
-            }
-            else
-            {
-                GameHandler.Instance.PlaySoundWithRandomPitch("Cluck01");
-            }
-            
+            GameHandler.Instance.PlaySoundWithRandomPitch("Cluck0" + Random.Range(1,8));
         }
 
         if(HRaw != Input.GetAxisRaw($"Horizontal P{playerNum}") || VRaw != Input.GetAxisRaw($"Vertical P{playerNum}"))
@@ -180,7 +170,7 @@ public class ChickenController : MonoBehaviour
     }
     public void Stun()
     {
-        GameHandler.Instance.PlaySoundWithRandomPitch("Cluck01");
+        GameHandler.Instance.PlaySoundWithRandomPitch("Cluck0" + Random.Range(1,8));
         StartCoroutine(StunnedCoroutine());
     }
 

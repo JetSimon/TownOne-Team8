@@ -20,6 +20,7 @@ public class Teleporter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameHandler.Instance.PlaySound("Teleport");
         collision.gameObject.transform.position = exit.transform.position;
     }
 }
