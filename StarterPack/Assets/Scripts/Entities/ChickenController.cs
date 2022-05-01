@@ -38,6 +38,8 @@ public class ChickenController : MonoBehaviour
 
     private Animator animator;
 
+    private AudioSource cluckSound;
+
     private void Start()
     {
         startingPoint = transform.position;
@@ -48,6 +50,7 @@ public class ChickenController : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        cluckSound = GetComponent<AudioSource>();
 
         //Get Raws
         HRaw = 0;
@@ -59,6 +62,13 @@ public class ChickenController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(Input.GetButtonDown($"Fire P{playerNum}"))
+        {
+            print("TRYING TO CLUCK");
+            cluckSound.pitch = Random.Range(0.85f, 1.2f);
+            cluckSound.Play();
+        }
+
         if(HRaw != Input.GetAxisRaw($"Horizontal P{playerNum}") || VRaw != Input.GetAxisRaw($"Vertical P{playerNum}"))
         {
             //Set Last Raws
