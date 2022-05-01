@@ -11,8 +11,8 @@ Player 4 uses gamepad 2
 ## Credits
 
 * Level Design/Project Management - Jace Nielsen
-* Programming/UI - Jet Simon
-* Programming/Level Art/UI - Evan Sarkozi
+* Programming/UI - [Jet Simon](https://simonjet.itch.io/)
+* Programming/Level Art/UI - [Evan Sarkozi](https://ggsevan.itch.io/)
 * Programming - Felipe Lara
 * Programming - Richard Jiang
 * Programming - Nghia "Mac" Vo
@@ -21,3 +21,5 @@ Player 4 uses gamepad 2
 
 
 All SFX made by Team Nugget or sourced from freesound.org
+
+[Play on itch.io!](https://simonjet.itch.io/nugget-madness)

@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameHandler : MonoBehaviour
 {
+
+    private Transform audioManagerTransform;
 
     [SerializeField]
     public string[] levelNames;
     public static GameHandler Instance { get; private set; }
     public float eggSpawnInterval = 10;
+    public int maxEggsInScene = 1;
 
     private int[] totalPoints = {0,0};
 
@@ -39,6 +43,38 @@ public class GameHandler : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadEntities();
+        audioManagerTransform = GameObject.Find("AudioManager").transform;
+        if(audioManagerTransform)
+        {
+            PlaySound("Music0" + Random.Range(0,4));
+        }
+    }
+
+    public void PlaySound(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Play();
+    }
+
+    public void PlaySoundWithRandomPitch(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.1f);
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Play();
+    }
+
+    public void StopSound(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Stop();
+    }
+
+    public void StopAllSounds()
+    {
+        foreach(Transform t in audioManagerTransform)
+        {
+            t.GetComponent<AudioSource>().Stop();
+        }
     }
 
     void LoadEntities()
@@ -69,6 +105,8 @@ public class GameHandler : MonoBehaviour
 
     public void EndGame()
     {
+        StopAllSounds();
+        GameHandler.Instance.PlaySound("LevelComplete");
         int winnerNumber = 0;
         int winnerPoints = 0;
         Color winnerColor = Color.white;
@@ -119,20 +157,29 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown("m"))
+        {
+            AudioListener.volume = AudioListener.volume == 0 ? 1f : 0;
+        }
+
         eggSpawnElapsed += Time.deltaTime;
         if(eggSpawnElapsed >= eggSpawnInterval)
         {
             //Try to spawn an egg at a hatch
-            List<HatchBehaviour> hatches = new List<HatchBehaviour>(spawnHatches);
-            while(hatches.Count > 0)
+            if (spawnHatches.Where(c => c.spawnedEggExists).Count() < maxEggsInScene)
             {
-                int index = Random.Range(0, hatches.Count);
-                if (hatches[index].containsEgg)
-                    hatches.RemoveAt(index);
-                else
+                List<HatchBehaviour> hatches = new List<HatchBehaviour>(spawnHatches);
+                while (hatches.Count > 0)
                 {
-                    hatches[index].SpawnEgg();
-                    break;
+                    int index = Random.Range(0, hatches.Count);
+                    if (hatches[index].containsEgg)
+                        hatches.RemoveAt(index);
+                    else
+                    {
+                        GameHandler.Instance.PlaySound("EggSpawn");
+                        hatches[index].SpawnEgg();
+                        break;
+                    }
                 }
             }
 

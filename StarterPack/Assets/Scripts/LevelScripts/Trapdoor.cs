@@ -20,11 +20,13 @@ public class Trapdoor : MonoBehaviour
 
     private void Awake()
     {
-    
+        
     }
 
     private void Start()
     {
+        
+
         Invoke("StartCycle", 2f);
     }
 
@@ -32,7 +34,7 @@ public class Trapdoor : MonoBehaviour
     {
         if(activeSprite)
         {
-            activeSprite.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+            activeSprite.GetComponent<SpriteRenderer>().enabled = false;
             disableCollision = false;
         }
         Invoke("CycleStep", 2f);
@@ -42,7 +44,7 @@ public class Trapdoor : MonoBehaviour
     {
         if (activeSprite)
         {
-            activeSprite.transform.localScale = new Vector3(1f, 1f, 1f);
+            activeSprite.GetComponent<SpriteRenderer>().enabled = true;
             disableCollision = true;
         }
         Invoke("StartCycle", 2f);
@@ -51,6 +53,10 @@ public class Trapdoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Dirty Force
+        //this.transform.position = (new Vector3(this.transform.position.x, this.transform.position.y, -0.5f));
+        //this.transform.SetPositionAndRotation(new Vector3(this.transform.position.x, this.transform.position.y, -0.5f), Quaternion.Euler(0,0,0));
+
         if (overlaps.Count > 0)
         {
             CheckOverlaps();
