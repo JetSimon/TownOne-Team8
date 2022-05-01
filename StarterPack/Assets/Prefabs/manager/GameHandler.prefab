@@ -61,3 +61,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c4de32e3ec0fc408dac63f659a3ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelNames:
+  - Main
+  eggSpawnInterval: 10
+  chickenControllers: []
+  spawnHatches: []
+  eggChutes: []
+  activePlayers: 00000000
+  lastLevelPlayed: 
