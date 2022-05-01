@@ -67,7 +67,7 @@ public class GameHandler : MonoBehaviour
         int winnerNumber = 0;
         int winnerPoints = 0;
         Color winnerColor = Color.white;
-        tied = false;
+        bool tied = false;
 
         foreach(ChickenController player in chickenControllers)
         {
