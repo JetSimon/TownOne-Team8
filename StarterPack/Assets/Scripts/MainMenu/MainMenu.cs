@@ -8,8 +8,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private string currentLevel;
     private int currentLevelIndex = 0;
-
-    [SerializeField]
     private string[] levelNames;
 
     [SerializeField]
@@ -24,9 +22,11 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        levelNames = GameHandler.Instance.levelNames;
         currentLevel = levelNames[currentLevelIndex];
         ChangeButton(0);
         UpdateUI();
+        
     }
 
     // Update is called once per frame
@@ -92,7 +92,9 @@ public class MainMenu : MonoBehaviour
     {
         SetActivePlayers();
         Debug.Log("Starting Game...");
+        GameHandler.Instance.lastLevelPlayed = currentLevel;
         SceneManager.LoadScene(currentLevel);
+        
     }
 
     void ChangeButton(int delta)

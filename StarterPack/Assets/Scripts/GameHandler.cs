@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
+
+    private Transform audioManagerTransform;
+
+    [SerializeField]
+    public string[] levelNames;
     public static GameHandler Instance { get; private set; }
     public float eggSpawnInterval = 10;
 
@@ -17,6 +22,8 @@ public class GameHandler : MonoBehaviour
     private float eggSpawnElapsed = 0;
 
     public bool[] activePlayers = {false, false, false, false};
+
+    public string lastLevelPlayed = "";
 
     void Awake()
     {
@@ -34,6 +41,26 @@ public class GameHandler : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadEntities();
+        audioManagerTransform = GameObject.Find("AudioManager").transform;
+    }
+
+    public void PlaySound(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Play();
+    }
+
+    public void PlaySoundWithRandomPitch(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.1f);
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Play();
+    }
+
+    public void StopSound(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Stop();
     }
 
     void LoadEntities()
@@ -94,6 +121,18 @@ public class GameHandler : MonoBehaviour
         
         
     }
+
+    public void LoadRandomLevel()
+    {
+        int index = Random.Range(0, levelNames.Length);
+        if(levelNames[index] == lastLevelPlayed)
+        {
+            index = (index + 1) % levelNames.Length;
+        }
+        lastLevelPlayed = levelNames[index];
+        SceneManager.LoadScene(levelNames[index]);
+    }
+
     void Start()
     {
         LoadEntities();
