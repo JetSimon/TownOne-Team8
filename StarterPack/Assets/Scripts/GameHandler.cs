@@ -71,9 +71,12 @@ public class GameHandler : MonoBehaviour
 
     public void StopAllSounds()
     {
-        foreach(Transform t in audioManagerTransform)
+        if (audioManagerTransform != null)
         {
-            t.GetComponent<AudioSource>().Stop();
+            foreach (Transform t in audioManagerTransform)
+            {
+                t.GetComponent<AudioSource>().Stop();
+            }
         }
     }
 
