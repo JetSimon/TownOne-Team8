@@ -125,11 +125,13 @@ MonoBehaviour:
   acceleration: 4
   baseSpeed: 4
   maxSpeed: 6
+  eggHoldSpeedModifier: 0.75
+  stunDuration: 2
   HRaw: 0
   VRaw: 0
   playerNum: 1
   carriedEgg: {fileID: 0}
-  slowerBy: 0.538
+  stunned: 0
 --- !u!58 &5433094769072823219
 CircleCollider2D:
   m_ObjectHideFlags: 0

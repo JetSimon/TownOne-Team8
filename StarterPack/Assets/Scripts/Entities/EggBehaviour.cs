@@ -5,8 +5,7 @@ using UnityEngine;
 public class EggBehaviour : MonoBehaviour
 {
     public Animator animator;
-    private ChickenController m_collidingChicken;
-
+    public ChickenController boundChicken;
     public GameObject boundSourceHatch;
     public GameObject boundDepositChute;
 
@@ -23,8 +22,8 @@ public class EggBehaviour : MonoBehaviour
         if(!pickedUp && chicken != null && chicken.carriedEgg == null)
         {
             pickedUp = true;
-            m_collidingChicken = collision.gameObject.GetComponent<ChickenController>();
-            m_collidingChicken.carriedEgg = gameObject;
+            boundChicken = collision.gameObject.GetComponent<ChickenController>();
+            boundChicken.carriedEgg = gameObject;
             animator.SetTrigger("Collected");
         }
     }
@@ -32,14 +31,14 @@ public class EggBehaviour : MonoBehaviour
     public void OnEggCollected()
     {
         boundSourceHatch.GetComponent<HatchBehaviour>().containsEgg = false;
-        transform.SetParent(m_collidingChicken.transform);
+        transform.SetParent(boundChicken.transform);
         transform.localPosition = new Vector3(0.0f, 1.75f, 0);
     }
     public void OnEggDeposited()
     {
         transform.SetParent(boundDepositChute.transform);
         transform.localPosition = Vector3.up * 0.5f;
-        m_collidingChicken.eggsSecured++;
-        m_collidingChicken.carriedEgg = null;
+        boundChicken.eggsSecured++;
+        boundChicken.carriedEgg = null;
     }
 }
