@@ -73,6 +73,7 @@ public class GameHandler : MonoBehaviour
         {
             if(player.eggsSecured > winnerPoints)
             {
+                tied = false;
                 winnerNumber = player.playerNum;
                 winnerPoints = player.eggsSecured;
                 winnerColor = player.GetPlayerColor();
