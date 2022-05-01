@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameHandler : MonoBehaviour
 {
 
+    private Transform audioManagerTransform;
+
     [SerializeField]
     public string[] levelNames;
     public static GameHandler Instance { get; private set; }
@@ -39,6 +41,26 @@ public class GameHandler : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadEntities();
+        audioManagerTransform = GameObject.Find("AudioManager").transform;
+    }
+
+    public void PlaySound(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Play();
+    }
+
+    public void PlaySoundWithRandomPitch(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.1f);
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Play();
+    }
+
+    public void StopSound(string s)
+    {
+        if(audioManagerTransform == null) return;
+        audioManagerTransform.Find(s).GetComponent<AudioSource>().Stop();
     }
 
     void LoadEntities()
