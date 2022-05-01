@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class DymamicCamera : MonoBehaviour
 {
     public Camera targetCamera;
 
     public float cameraDamping = 5.0f;
-    public List<Transform> followedTransforms = new List<Transform>();
+    public List<Transform> followedTransforms;
     public float additionalPadding = 0.5f;
     public float minSize = 1;
+
+    public void Start()
+    {
+        followedTransforms = FindObjectsOfType<ChickenController>().Select(x => x.transform).ToList();
+    }
 
     public void Update()
     {

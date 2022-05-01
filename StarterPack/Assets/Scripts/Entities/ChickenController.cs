@@ -43,6 +43,9 @@ public class ChickenController : MonoBehaviour
     private AudioSource cluckSound;
     private Color initialColor;
 
+    public GameObject wing;
+    private SpriteRenderer wingRenderer;
+
     [SerializeField]
     private Sprite[] hats;
 
@@ -64,6 +67,8 @@ public class ChickenController : MonoBehaviour
         animator = GetComponent<Animator>();
         cluckSound = GetComponent<AudioSource>();
 
+        wingRenderer = wing.GetComponent<SpriteRenderer>();
+
         //hatRenderer.color = spriteRenderer.color;
         //hatRenderer.sprite = hats[Random.Range(0, hats.Length)];
 
@@ -81,7 +86,9 @@ public class ChickenController : MonoBehaviour
     private void Update()
     {
         if (GetComponentInChildren<EggBehaviour>() != null)
-            carriedEgg.transform.localPosition = new Vector3(0, 1.75f, 0);
+            carriedEgg.transform.localPosition = spriteRenderer.flipX ? new Vector3(1.00f, 0, 0) : new Vector3(-1.10f, 0, 0);
+
+        wingRenderer.color = spriteRenderer.color;
     }
 
     private void FixedUpdate()
@@ -120,6 +127,21 @@ public class ChickenController : MonoBehaviour
 
         if(HRaw > 0) spriteRenderer.flipX = true;
         if(HRaw < 0) spriteRenderer.flipX = false;
+
+
+        wing.transform.localPosition = carriedEgg != null ? new Vector3(-0.6f, -0.3f, 0) : new Vector3(0.33f, 0, 0);
+        wing.transform.localScale = carriedEgg != null ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+
+        if (spriteRenderer.flipX)
+        {
+            if (carriedEgg == null)
+                wing.transform.localPosition -= Vector3.right * 0.65f;
+            else wing.transform.localPosition += Vector3.right * 0.85f;
+
+            var s = wing.transform.localScale;
+            s.x *= -1;
+            wing.transform.localScale = s;
+        }
 
         animator.SetBool("Walking", HRaw != 0);
 
@@ -180,6 +202,7 @@ public class ChickenController : MonoBehaviour
                 carriedEgg = otherChicken.carriedEgg;
                 carriedEgg.GetComponent<EggBehaviour>().boundChicken = this;
                 carriedEgg.transform.SetParent(transform);
+
                 carriedEgg.transform.localPosition = new Vector3(0.0f, 1.75f, 0);
 
                                 otherChicken.carriedEgg = null;
