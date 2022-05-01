@@ -650,8 +650,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.5704, y: -242}
-  m_SizeDelta: {x: 1042.5211, y: 231.0013}
+  m_AnchoredPosition: {x: 5.7235, y: -217.12}
+  m_SizeDelta: {x: 1233.5638, y: 181.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7561385804241632861
 CanvasRenderer:
@@ -683,7 +683,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7bc0996ff89154834a6057b1504bde05, type: 3}
-    m_FontSize: 52
+    m_FontSize: 44
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -694,7 +694,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: press space to go back  to menu
+  m_Text: 'press space to play a new game
+
+    press any other key to go back to
+    the main menu'
 --- !u!1 &6007018672251057532
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,10 +32,18 @@ public class GameHud : MonoBehaviour
 
     public void Update()
     {
-        if(Input.GetKeyDown("space") && resultsPanel.activeSelf)
+        if(resultsPanel.activeSelf)
         {
-            Time.timeScale = 1;
-            SceneManager.LoadScene("MainMenu");
+            if(Input.GetKeyDown("space"))
+            {
+                Time.timeScale = 1;
+                GameHandler.Instance.LoadRandomLevel();
+            }
+            else if(Input.anyKeyDown)
+            {
+                Time.timeScale = 1;
+                SceneManager.LoadScene("MainMenu");   
+            }
         }
     }
 }

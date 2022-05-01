@@ -99,6 +99,18 @@ public class GameHandler : MonoBehaviour
         
         
     }
+
+    public void LoadRandomLevel()
+    {
+        int index = Random.Range(0, levelNames.Length);
+        if(levelNames[index] == lastLevelPlayed)
+        {
+            index = (index + 1) % levelNames.Length;
+        }
+        lastLevelPlayed = levelNames[index];
+        SceneManager.LoadScene(levelNames[index]);
+    }
+
     void Start()
     {
         LoadEntities();
