@@ -149,6 +149,7 @@ public class ChickenController : MonoBehaviour
 
         if(carriedEgg)
         {
+            carriedEgg.GetComponent<EggBehaviour>().boundSourceHatch.GetComponent<HatchBehaviour>().spawnedEggExists = false;
             Destroy(carriedEgg);
         }
 
