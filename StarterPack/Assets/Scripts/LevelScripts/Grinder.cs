@@ -9,7 +9,7 @@ public class Grinder : MonoBehaviour
     [SerializeField] float shrinkRate = 0.95f;
     [SerializeField] Component activeSprite;
     [SerializeField] ParticleSystem chickenDeathSystem;
-
+    Color playerColor;
     [SerializeField] Material refMaterial;
 
     bool pendingDeath = false;
