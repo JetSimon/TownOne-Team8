@@ -67,6 +67,7 @@ public class GameHandler : MonoBehaviour
         int winnerNumber = 0;
         int winnerPoints = 0;
         Color winnerColor = Color.white;
+        tied = false;
 
         foreach(ChickenController player in chickenControllers)
         {
@@ -78,10 +79,14 @@ public class GameHandler : MonoBehaviour
             }
             else if(player.eggsSecured == winnerPoints)
             {
-                winnerColor = Color.white;
-                winnerNumber = -1;
-                break;
+                tied = true;
             }
+        }
+
+        if(tied)
+        {
+            winnerColor = Color.white;
+            winnerNumber = -1;
         }
 
         GameObject.Find("GameHUD").GetComponent<GameHud>().ShowWinner(winnerNumber, winnerColor);
