@@ -40,5 +40,6 @@ public class EggBehaviour : MonoBehaviour
         transform.localPosition = Vector3.up * 0.5f;
         boundChicken.eggsSecured++;
         boundChicken.carriedEgg = null;
+        boundSourceHatch.GetComponent<HatchBehaviour>().spawnedEggExists = false;
     }
 }
