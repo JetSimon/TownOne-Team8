@@ -5,6 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ChickenController : MonoBehaviour
 {
+    [Header("Player")]
+    public int playerNum = 1;
+
+    [Header("Speed")]
     public int eggsSecured;
     public float speed;
     public float finalSpeed;
@@ -13,11 +17,12 @@ public class ChickenController : MonoBehaviour
     public float maxSpeed = 6.0f;
 
     public float stunTime = 2.00f;
-
+    
+    [Header("Raws")]
     public float HRaw;
     public float VRaw;
 
-    public int playerNum = 1;
+    [Header("Inspects")]
     private Vector3 startingPoint;
     private Vector3 initialScale;
     private bool canMove = true;
@@ -25,9 +30,9 @@ public class ChickenController : MonoBehaviour
     public GameObject carriedEgg;
     public bool stunned;
 
+    //Privates
     private Rigidbody2D m_rigidbody;
     private SpriteRenderer spriteRenderer;
-
     private Animator animator;
 
     private void Start()
