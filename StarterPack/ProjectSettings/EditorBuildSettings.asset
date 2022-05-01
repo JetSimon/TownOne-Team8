@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Grinder Alley.unity
     guid: 2d372475bc3a7274aafa65ea14c3a6f0
+  - enabled: 1
+    path: Assets/Scenes/Pit Panic.unity
+    guid: 55f969ec55535084f88de0a90b28137b
   m_configObjects: {}
