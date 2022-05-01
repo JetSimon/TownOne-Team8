@@ -36,7 +36,7 @@ public class DymamicCamera : MonoBehaviour
             targetCamera.transform.position = Vector3.Lerp(targetCamera.transform.position, middle, Time.deltaTime * cameraDamping);
 
             //Lerp size
-            float size = Mathf.Max(dimensions.y, dimensions.x / targetCamera.aspect);
+            float size = Mathf.Max(dimensions.y / 2, dimensions.x / targetCamera.aspect / 2);
             size = Mathf.Max(size, minSize);
             targetCamera.orthographicSize = Mathf.Lerp(targetCamera.orthographicSize, size, Time.deltaTime * cameraDamping);
         }
