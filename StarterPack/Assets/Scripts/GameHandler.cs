@@ -12,10 +12,11 @@ public class GameHandler : MonoBehaviour
 
     private ChickenController[] chickenControllers;
     private HatchBehaviour[] spawnHatches;
+    private EggChuteBehaviour[] eggChutes;
 
     private float eggSpawnElapsed = 0;
 
-    private bool[] activePlayers = {false, false, false, false};
+    public bool[] activePlayers = {false, false, false, false};
 
     void Awake()
     {
@@ -38,11 +39,14 @@ public class GameHandler : MonoBehaviour
     void LoadEntities()
     {
         chickenControllers = FindObjectsOfType<ChickenController>();
-        Debug.Log($"There are {chickenControllers.Length} chickens in the match");
-
         spawnHatches = FindObjectsOfType<HatchBehaviour>();
-        Debug.Log($"There are {spawnHatches.Length} egg spawn hatches in the match");
+        eggChutes = FindObjectsOfType<EggChuteBehaviour>();
 
+        foreach (var controller in chickenControllers)
+            controller.gameObject.SetActive(activePlayers[controller.playerNum - 1]);
+
+        foreach (var chute in eggChutes)
+            chute.gameObject.SetActive(activePlayers[chute.requiredPlayerNum - 1]);
     }
 
     void AddUpPoints()
