@@ -14,7 +14,7 @@ Player 4 uses gamepad 2
 * Programming/UI - [Jet Simon](https://simonjet.itch.io/)
 * Programming/Level Art/UI - [Evan Sarkozi](https://ggsevan.itch.io/)
 * Programming - Felipe Lara
-* Programming - Richard Jiang
+* Programming - [Richard Jiang](https://richard233.itch.io/)
 * Programming - Nghia "Mac" Vo
 * Art - Ariane Shairp
 * Music/SFX Sourcing/Editing - Alex Devitt
