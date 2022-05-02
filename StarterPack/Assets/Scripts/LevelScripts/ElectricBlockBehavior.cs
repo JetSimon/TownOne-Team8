@@ -30,62 +30,28 @@ public class ElectricBlockBehavior : MonoBehaviour
         dangerColor = Color.red;
         safeColor = Color.green;
         spriteRenderer.color = safeColor;
+
+        StartCoroutine(Loop());
     }
         
-    // Update is called once per frame
-    void Update()
+    private IEnumerator Loop()
     {
-        currentTime -= Time.deltaTime;
-        if (currentTime <= 0)
+        while (true)
         {
-            if (isSafe)
-            {
-                spriteRenderer.color = dangerColor;
-                currentTime = ElectricityTimeInterval;
-            }
-            else
-            {
-                spriteRenderer.color = safeColor;
-                currentTime = timeInBetweenElectricity;
-            }
-            isSafe = !isSafe;
-        }
-        if (!isSafe)
-        {
-            if (chickenOverlaps.Count > 0)
-            {
-                Stun();
-            }
+            spriteRenderer.color = dangerColor;
+            isSafe = false;
+            yield return new WaitForSeconds(ElectricityTimeInterval);
+            spriteRenderer.color = safeColor;
+            isSafe = true;
+            yield return new WaitForSeconds(ElectricityTimeInterval);
         }
     }
-
-    private void Stun()
-    {
-        foreach (ChickenController chicken in chickenOverlaps)
-        {
-            if (!chicken.stunned)
-            {
-                chicken.Stun();
-            }
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var chicken = collision.gameObject.GetComponent<ChickenController>();
-        if (chicken != null)
-        {
-            chickenOverlaps.Add(chicken);
-        }
+        if (chicken != null && !chicken.stunned && !isSafe)
+            chicken.Stun();
         
         //print($"ElectricBlockBehavior: {collision.gameObject.name}");
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (chickenOverlaps.Contains(collision.gameObject.GetComponent<ChickenController>()))
-        {
-            chickenOverlaps.Remove(collision.gameObject.GetComponent<ChickenController>());
-        }
     }
 }
