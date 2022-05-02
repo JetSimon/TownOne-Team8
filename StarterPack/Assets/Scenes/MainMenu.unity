@@ -130,6 +130,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4136774543210479332, guid: b718ee17a1ead46dca48ec08a7b4c2d3, type: 3}
+      propertyPath: levelNames.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136774543210479332, guid: b718ee17a1ead46dca48ec08a7b4c2d3, type: 3}
+      propertyPath: levelNames.Array.data[2]
+      value: Pit Panic
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136774543210479332, guid: b718ee17a1ead46dca48ec08a7b4c2d3, type: 3}
+      propertyPath: levelNames.Array.data[3]
+      value: Chicken Frenzy
+      objectReference: {fileID: 0}
     - target: {fileID: 4136774543210479337, guid: b718ee17a1ead46dca48ec08a7b4c2d3, type: 3}
       propertyPath: m_Name
       value: GameHandler
