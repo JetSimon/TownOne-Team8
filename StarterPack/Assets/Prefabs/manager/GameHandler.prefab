@@ -66,6 +66,7 @@ MonoBehaviour:
   - Death Zone
   - The Farm
   - Pit Panic
+  - Chicken Frenzy
   eggSpawnInterval: 10
   maxEggsInScene: 1
   chickenControllers: []
