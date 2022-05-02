@@ -33,6 +33,9 @@ public class Trapdoor : MonoBehaviour
             animator.SetBool("Open", true);
             yield return new WaitForSeconds(0.2f);
             disableCollision = false;
+            foreach (var chicken in queuedChickens)
+                KillPlayer(chicken);
+            queuedChickens.Clear();
             yield return new WaitForSeconds(interval);
         }
     }
@@ -61,10 +64,22 @@ public class Trapdoor : MonoBehaviour
     }
 
 
+    private List<ChickenController> queuedChickens = new List<ChickenController>();
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var chicken = collision.gameObject.GetComponent<ChickenController>();
-        if (chicken != null && !disableCollision)
-            KillPlayer(chicken);
+        if (chicken != null)
+        {
+            if (!disableCollision)
+                KillPlayer(chicken);
+            else queuedChickens.Add(chicken);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        var chicken = collision.gameObject.GetComponent<ChickenController>();
+        if (chicken != null)
+            queuedChickens.Remove(chicken);
     }
 }
